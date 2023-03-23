@@ -7,7 +7,7 @@ class ArqLeitura {
         Scanner entrada;
     
 	ArqLeitura(String nomeArquivo) throws FileNotFoundException {	
-        File file = new File("Arvore.csv");
+        File file = new File("./codigo/projeto2-grafos/arquivos/" + nomeArquivo);
         entrada = new Scanner(file, "UTF-8");
 
 	}
@@ -22,7 +22,8 @@ class ArqLeitura {
 		String textoEntrada = null;
 
 		try {
-			textoEntrada = entrada.nextLine();;
+			textoEntrada = entrada.nextLine();
+            System.out.println(textoEntrada);
 		}
 		finally {
 			return textoEntrada;
