@@ -6,12 +6,12 @@ public class Subgrafo{
     
     public Subgrafo(String v){
 
-        String[] individual = v.split(" ");
+        String[] individual = v.split(",|;|\s");
 
         for (int i = 0; i < individual.length(); i++){
             vertices[i] = Integer.parseInt(individual[i]);
         }
-        
+
     }
 
     void exibeSubGrafo(){

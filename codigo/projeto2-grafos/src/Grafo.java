@@ -116,7 +116,20 @@ public class Grafo {
 
     public Grafo subGrafo(Lista<Integer> vertices){
         Grafo subgrafo = new Grafo("Subgrafo de "+this.nome);
+        int vetor [] = vertices.allElements();
         
+        for (int i = 0; i < vetor.length(); i++){
+            subgrafo.addVertice(); //Tem que passar vetor[i]? 
+            for (int x = 0; x < vetor.length(); x++){
+               if(Grafo.existeAresta(vetor[i], vetor[x])){ //Grafo original possui aresta? 
+
+                subgrafo.addAresta(vetor[i], vetor[x], 0); //Se sim, adiciona essa aresta no subgrafo
+
+               }
+
+            }
+        }
+
         return subgrafo;
     }
     
