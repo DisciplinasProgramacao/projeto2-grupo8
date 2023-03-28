@@ -17,16 +17,24 @@ class ArqLeitura {
 	}
 
 	@SuppressWarnings("finally")
-	public String ler() throws FileNotFoundException, EOFException {
+	public String ler(int params) throws FileNotFoundException, EOFException {
 
-		String textoEntrada = null;
+		String []  textoArquivo;
+		int count = 0;
 
 		try {
-			textoEntrada = entrada.nextLine();
-            System.out.println(textoEntrada);
+			textoArquivo = null;
+			while (count != params){
+				textoArquivo = entrada.nextLine().split(";");
+				count++;
+			}
+			return textoArquivo[1];
 		}
-		finally {
-			return textoEntrada;
+		catch(Exception e){
+			System.out.println("Error: " + e.getMessage());
 		}
+		return null;
+
 	}
+
 }
