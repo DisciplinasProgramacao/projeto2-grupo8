@@ -119,17 +119,15 @@ public class Grafo {
         int vetor [] = vertices.allElements();
         
         for (int i = 0; i < vetor.length(); i++){
-            subgrafo.addVertice(); //Tem que passar vetor[i]? 
+            subgrafo.addVertice(vetor [i]); 
             for (int x = 0; x < vetor.length(); x++){
-               if(Grafo.existeAresta(vetor[i], vetor[x])){ //Grafo original possui aresta? 
+               if(Grafo.existeAresta(vetor[i], vetor[x]) && subgrafo.existeVertice(vetor[x])){ //Grafo original possui aresta? O vértice já existe no Subgrafo?
 
                 subgrafo.addAresta(vetor[i], vetor[x], 0); //Se sim, adiciona essa aresta no subgrafo
 
                }
-
             }
         }
-
         return subgrafo;
     }
     
