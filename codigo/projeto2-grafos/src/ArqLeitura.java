@@ -9,7 +9,6 @@ class ArqLeitura {
 	ArqLeitura(String nomeArquivo) throws FileNotFoundException {	
         File file = new File("./codigo/projeto2-grafos/arquivos/" + nomeArquivo);
         entrada = new Scanner(file, "UTF-8");
-
 	}
 
 	public void fecharArquivo() throws FileNotFoundException {
