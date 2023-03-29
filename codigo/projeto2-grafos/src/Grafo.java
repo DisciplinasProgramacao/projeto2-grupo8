@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,24 +34,28 @@ public class Grafo {
     public final String nome;
     private ABB<Vertice> vertices;
 
-    /* Cria e retorna o grafo completo de acordo com a ordem recebida. Caso a ordem seja menor ou igual a zero ignora e exibe um warning
+    /*
+     * Cria e retorna o grafo completo de acordo com a ordem recebida. Caso a ordem
+     * seja menor ou igual a zero ignora e exibe um warning
+     * 
      * @param ordem (Ordem do grafo - quantidade de vértices)
+     * 
      * @return Grafo (Grafo completo criado)
      */
     public static Grafo grafoCompleto(int ordem) {
-        if(ordem <= 0){
+        if (ordem <= 0) {
             logger.log(Level.WARNING, "Ordem do grafo deve ser maior que zero");
             return null;
         }
 
         Grafo grafoCompleto = new Grafo("grafoCompleto");
-        
-        for(int i = 1; i <= ordem; i++){
+
+        for (int i = 1; i <= ordem; i++) {
             grafoCompleto.addVertice(i);
         }
 
-        for(int origem = 1; origem <= ordem; origem++){
-            for(int destino = origem + 1; destino <= ordem + 1; destino++){
+        for (int origem = 1; origem <= ordem; origem++) {
+            for (int destino = origem + 1; destino <= ordem + 1; destino++) {
                 grafoCompleto.addAresta(origem, destino, 0);
             }
         }
@@ -59,7 +64,8 @@ public class Grafo {
     }
 
     /**
-     * Construtor. Cria um grafo vazio com um nome escolhido pelo usuário. Em caso de nome não informado
+     * Construtor. Cria um grafo vazio com um nome escolhido pelo usuário. Em caso
+     * de nome não informado
      * (string vazia), recebe o nome genérico "Grafo"
      */
     public Grafo(String nome) {
@@ -90,11 +96,15 @@ public class Grafo {
      * @param nomeArquivo nome do arquivo de destino
      */
     public void salvar(String nomeArquivo) {
-        ArqCriar.criar(nomeArquivo, vertices);
+        try {
+            ArqCriar.criar(nomeArquivo);
+        } catch (IOException e) {
+        }
     }
 
     /**
-     * Adiciona um vértice com o id especificado. Ignora a ação e retorna false se já existir um vértice com este id
+     * Adiciona um vértice com o id especificado. Ignora a ação e retorna false se
+     * já existir um vértice com este id
      * 
      * @param id O identificador do vértice a ser criado/adicionado
      * @return TRUE se houve a inclusão do vértice, FALSE se já existia vértice com
@@ -114,8 +124,10 @@ public class Grafo {
     }
 
     /**
-     * Adiciona uma aresta entre dois vértices do grafo, caso os dois vértices existam no grafo. 
-     * Caso a aresta já exista, ou algum dos vértices não existir, o comando é ignorado e retorna FALSE.
+     * Adiciona uma aresta entre dois vértices do grafo, caso os dois vértices
+     * existam no grafo.
+     * Caso a aresta já exista, ou algum dos vértices não existir, o comando é
+     * ignorado e retorna FALSE.
      * 
      * @param origem  Vértice de origem
      * @param destino Vértice de destino
@@ -152,7 +164,10 @@ public class Grafo {
         for (int i = 0; i < vetor.length; i++) {
             subgrafo.addVertice(vetor[i]);
             for (int x = 0; x < vetor.length; x++) {
-                if (Grafo.existeAresta(vetor[i], vetor[x]) && subgrafo.existeVertice(vetor[x])) { // Grafo original possui aresta? O vértice já existe no Subgrafo?
+                if (Grafo.existeAresta(vetor[i], vetor[x]) && subgrafo.existeVertice(vetor[x])) { // Grafo original
+                                                                                                  // possui aresta? O
+                                                                                                  // vértice já existe
+                                                                                                  // no Subgrafo?
 
                     subgrafo.addAresta(vetor[i], vetor[x], 0); // Se sim, adiciona essa aresta no subgrafo
 
