@@ -56,7 +56,7 @@ public class Grafo {
 
         for (int origem = 1; origem <= ordem; origem++) {
             for (int destino = origem + 1; destino <= ordem + 1; destino++) {
-                grafoCompleto.addAresta(origem, destino, 0);
+                grafoCompleto.addAresta(origem, destino, 1);
             }
         }
 

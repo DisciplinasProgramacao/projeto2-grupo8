@@ -39,6 +39,22 @@ public class Aresta {
         this.visitada = false;
     }
 
+
+    /**
+     * Construtor para arestas sem peso. A aresta é criada como não-visitada.
+     * @param peso Peso da aresta
+     * @param dest Vértice de destino
+     */
+    public Aresta(int destino){
+        this.peso = 0;
+        this.destino = destino;
+        this.visitada = false;
+    }
+
+
+
+
+
     /**
      * Método de acesso para o peso da aresta
      * @return Peso da aresta (int)
