@@ -91,8 +91,8 @@ public class Grafo {
     }
 
     public void carregar(String nomeArquivo) throws FileNotFoundException, EOFException {
-        ArqLeitura arquivo_vertice = new ArqLeitura("Arquivo.csv");
-        ArqLeitura arquivo_aresta = new ArqLeitura("Arquivo.csv");
+        ArqLeitura arquivo_vertice = new ArqLeitura(nomeArquivo + ".csv");
+        ArqLeitura arquivo_aresta = new ArqLeitura(nomeArquivo + ".csv");
 
         String retorno;
         String[] array, array_vertice;
