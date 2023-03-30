@@ -179,17 +179,23 @@ public class Grafo {
         return false;
     }
 
+    /**
+     * 
+     * @param vertices Recebe uma lista de vértices, para criar o subgrafo
+     * @return Subgrafo
+     */
+
     public Grafo subGrafo(Lista<Integer> vertices) {
         Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
-        int vetor[] = vertices.allElements();
+        Integer vetor[] = new Integer[vertices.size()];
+        vetor = vertices.allElements(vetor);
 
         for (int i = 0; i < vetor.length; i++) {
             subgrafo.addVertice(vetor[i]);
+        }
+        for (int i = 0; i < vetor.length; i++) {
             for (int x = 0; x < vetor.length; x++) {
-                if (Grafo.existeAresta(vetor[i], vetor[x]) && subgrafo.existeVertice(vetor[x])) { // Grafo original
-                                                                                                  // possui aresta? O
-                                                                                                  // vértice já existe
-                                                                                                  // no Subgrafo?
+                if ((this.existeAresta(vetor[i], vetor[x]) != null) && (subgrafo.existeVertice(vetor[x]) != null)) {
 
                     subgrafo.addAresta(vetor[i], vetor[x], 0); // Se sim, adiciona essa aresta no subgrafo
 
