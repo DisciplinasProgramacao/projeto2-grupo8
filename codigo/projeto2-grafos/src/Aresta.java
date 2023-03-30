@@ -34,23 +34,22 @@ public class Aresta {
      * @param dest Vértice de destino
      */
     public Aresta(int peso, int destino){
+       init(peso, destino);
+    }
+
+    /**
+     * Construtor para arestas sem peso. A aresta é criada como não-visitada.
+     * @param dest Vértice de destino
+     */
+    public Aresta(int destino){
+        init(0,destino);
+    }
+
+    private void init(int peso, int destino){
         this.peso = peso;
         this.destino = destino;
         this.visitada = false;
     }
-
-
-    /**
-     * Construtor para arestas sem peso. A aresta é criada como não-visitada.
-     * @param peso Peso da aresta
-     * @param dest Vértice de destino
-     */
-    public Aresta(int destino){
-        this.peso = 0;
-        this.destino = destino;
-        this.visitada = false;
-    }
-
 
 
 
