@@ -56,7 +56,7 @@ public class Grafo {
 
         for (int origem = 1; origem <= ordem; origem++) {
             for (int destino = origem + 1; destino <= ordem + 1; destino++) {
-                grafoCompleto.addAresta(origem, destino, 1);
+                grafoCompleto.addAresta(origem, destino, 0);
             }
         }
 
@@ -156,6 +156,12 @@ public class Grafo {
     public boolean completo() {
         return false;
     }
+
+    /**
+     * 
+     * @param vertices Recebe uma lista de vértices, para criar o subgrafo
+     * @return Subgrafo
+     */
 
     public Grafo subGrafo(Lista<Integer> vertices) {
         Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
