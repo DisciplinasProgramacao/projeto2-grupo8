@@ -18,12 +18,12 @@ class ArqLeitura {
 	@SuppressWarnings("finally")
 	public String ler(int params) throws FileNotFoundException, EOFException {
 
-		String []  textoArquivo;
+		String []  textoArquivo = null;
 		int count = 0;
 
 		try {
-			textoArquivo = null;
 			while (count != params){
+				textoArquivo = null;
 				textoArquivo = entrada.nextLine().split(";");
 				count++;
 			}

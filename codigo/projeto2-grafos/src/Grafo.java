@@ -1,3 +1,5 @@
+import java.io.EOFException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,7 +88,27 @@ public class Grafo {
         return this.nome;
     }
 
-    public void carregar(String nomeArquivo) {
+    public void carregar(String nomeArquivo) throws FileNotFoundException, EOFException {
+        ArqLeitura arquivo_vertice = new ArqLeitura("Arquivo.csv");
+        ArqLeitura arquivo_aresta = new ArqLeitura("Arquivo.csv");
+            
+            String retorno;
+            String [] array, array_vertice;
+
+            // Caso queira retornar arresta basta digitar 1 vertice 2 e assim sucessivamente
+            retorno = arquivo_vertice.ler(1);
+            array = retorno.split(",");
+            for(int i = 0; i < array.length; i++) {
+                this.addVertice(Integer.parseInt(array[i]));
+            }
+            retorno = null;
+            array = null;
+            retorno = arquivo_aresta.ler(2);
+            array = retorno.split(",");
+            for(int i = 0; i < array.length; i++) {
+                array_vertice = array[i].split("-");
+                this.addAresta(Integer.parseInt(array_vertice[0]), Integer.parseInt(array_vertice[1]), Integer.parseInt(array_vertice[2]));
+            }
 
     }
 
