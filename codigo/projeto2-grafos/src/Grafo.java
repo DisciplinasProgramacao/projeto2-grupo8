@@ -1,6 +1,8 @@
 import java.io.EOFException;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -91,24 +93,25 @@ public class Grafo {
     public void carregar(String nomeArquivo) throws FileNotFoundException, EOFException {
         ArqLeitura arquivo_vertice = new ArqLeitura("Arquivo.csv");
         ArqLeitura arquivo_aresta = new ArqLeitura("Arquivo.csv");
-            
-            String retorno;
-            String [] array, array_vertice;
 
-            // Caso queira retornar arresta basta digitar 1 vertice 2 e assim sucessivamente
-            retorno = arquivo_vertice.ler(1);
-            array = retorno.split(",");
-            for(int i = 0; i < array.length; i++) {
-                this.addVertice(Integer.parseInt(array[i]));
-            }
-            retorno = null;
-            array = null;
-            retorno = arquivo_aresta.ler(2);
-            array = retorno.split(",");
-            for(int i = 0; i < array.length; i++) {
-                array_vertice = array[i].split("-");
-                this.addAresta(Integer.parseInt(array_vertice[0]), Integer.parseInt(array_vertice[1]), Integer.parseInt(array_vertice[2]));
-            }
+        String retorno;
+        String[] array, array_vertice;
+
+        // Caso queira retornar arresta basta digitar 1 vertice 2 e assim sucessivamente
+        retorno = arquivo_vertice.ler(1);
+        array = retorno.split(",");
+        for (int i = 0; i < array.length; i++) {
+            this.addVertice(Integer.parseInt(array[i]));
+        }
+        retorno = null;
+        array = null;
+        retorno = arquivo_aresta.ler(2);
+        array = retorno.split(",");
+        for (int i = 0; i < array.length; i++) {
+            array_vertice = array[i].split("-");
+            this.addAresta(Integer.parseInt(array_vertice[0]), Integer.parseInt(array_vertice[1]),
+                    Integer.parseInt(array_vertice[2]));
+        }
 
     }
 
@@ -116,12 +119,38 @@ public class Grafo {
      * Salvar grafo em um arquivo
      * 
      * @param nomeArquivo nome do arquivo de destino
+     * @throws IOException
      */
-    public void salvar(String nomeArquivo) {
-        try {
-            ArqCriar.criar(nomeArquivo);
-        } catch (IOException e) {
+    public void salvar(String nomeArquivo) throws IOException {
+        FileWriter arq = new FileWriter("./codigo/projeto2-grafos/arquivos/" + nomeArquivo + ".csv");
+        PrintWriter gravarArq = new PrintWriter(arq);
+
+        StringBuilder idVert = new StringBuilder();
+        StringBuilder idArest = new StringBuilder();
+
+        for (int i = 0; i < vertices.size(); i++) {
+            Vertice vertice = vertices.find(i);
+            if (idVert.toString() != "")
+                idVert.append(",");
+            idVert.append(vertice.getId());
+
+            for (int j = 0; i < vertice.getAresta().size(); i++) {
+                Aresta aresta = vertice.getAresta().find(j);
+                if (idArest.toString() != "")
+                    idArest.append(",");
+                idArest.append(vertice.getId());
+                idArest.append("-");
+                idArest.append(aresta.destino());
+                idArest.append("-");
+                idArest.append(aresta.peso());
+            }
         }
+        gravarArq.write("vertice;");
+        gravarArq.write(idVert.toString() + ";");
+        gravarArq.write(";\naresta;");
+        gravarArq.write(idArest.toString() + ";");
+
+        arq.close();
     }
 
     /**
