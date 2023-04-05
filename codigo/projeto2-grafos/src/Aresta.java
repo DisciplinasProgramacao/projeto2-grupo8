@@ -42,7 +42,7 @@ public class Aresta {
      * @param dest Vértice de destino
      */
     public Aresta(int destino){
-        init(0,destino);
+        init(0, destino);
     }
 
     private void init(int peso, int destino){
