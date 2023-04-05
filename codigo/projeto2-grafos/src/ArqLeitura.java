@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+//CLASSE NAO USADA
 class ArqLeitura {
         Scanner entrada;
     
