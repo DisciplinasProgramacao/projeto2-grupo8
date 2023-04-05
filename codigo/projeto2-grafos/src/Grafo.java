@@ -138,10 +138,10 @@ public class Grafo {
         StringBuilder idVert = new StringBuilder();
         StringBuilder idArest = new StringBuilder();
 
-
         for (int i = 1; i <= this.ordem(); i++) {
             Vertice vertice = vertices.find(i);
-            idVert.append(vertice.getId());
+            if(vertice != null)
+                idVert.append(vertice.getId());
             if (i < this.ordem())
                 idVert.append(",");            
 

@@ -8,6 +8,11 @@ public class App {
         System.out.flush();
     }
 
+    static void pausa() {
+        System.out.println("Enter para continuar.");
+        teclado.nextLine();
+    }
+
     public static int menuGrafos() {
         limparTela();
         System.out.println("Menu");
@@ -51,13 +56,17 @@ public class App {
 
                     break;
                 case 5:
-
+                    System.out.println("Ordem do grafo: ");
+                    int ordem = Integer.parseInt(teclado.nextLine());
+                    System.out.println(Grafo.grafoCompleto(ordem)); //Verificar COMO exibir o grafo completo e validar esse acesso estático
                     break;
                 case 6:
-
+                    Grafo subGrafo = gerarSubGrafo(grafo); //Verificar como preencher o arquivo nesse caso
+                    subGrafo.salvar("subgrafo");
+                    System.out.println("Arquivo de subgrafo criado"); //Posteriormente verificar a criação de um método para imprimir o arq
                     break;
             }
-
+            pausa();
         } while (opcao != 0);
         System.out.println("Saindo...");
     }
@@ -95,4 +104,20 @@ public class App {
         }while(opcao != 0);
     }
 
+    private static Grafo gerarSubGrafo(Grafo grafo){
+        
+
+        Lista<Integer> verticesSubGrafo = new Lista<>();
+        int opcao, vertice;
+        do{
+            System.out.println("Vértice que deseja para gerar o subgrafo: ");
+            vertice = Integer.parseInt(teclado.nextLine());
+            verticesSubGrafo.add(vertice);
+            
+            System.out.println("Digite um número para continuar a selecionar vértices ou 0 para sair: ");
+            opcao = Integer.parseInt(teclado.nextLine());
+        }while(opcao != 0);
+
+        return grafo.subGrafo(verticesSubGrafo);
+    }
 }
