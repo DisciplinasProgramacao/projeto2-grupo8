@@ -1,4 +1,10 @@
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,7 +62,7 @@ public class Grafo {
 
         for (int origem = 1; origem <= ordem; origem++) {
             for (int destino = origem + 1; destino <= ordem + 1; destino++) {
-                grafoCompleto.addAresta(origem, destino, 1);
+                grafoCompleto.addAresta(origem, destino, 0);
             }
         }
 
@@ -86,7 +92,37 @@ public class Grafo {
         return this.nome;
     }
 
-    public void carregar(String nomeArquivo) {
+    public void carregar(String nomeArquivo) throws FileNotFoundException, EOFException {
+        File file = new File("./codigo/projeto2-grafos/arquivos/" + nomeArquivo + ".csv");
+        Scanner entrada = new Scanner(file, "UTF-8");
+
+        String leitura = entrada.nextLine();
+        String vertices, linhaArestas;
+        String[] array_vertice, array_aresta, arestas;
+        int origem, destino, peso;
+
+        vertices = leitura.split(";")[1];
+        array_vertice = vertices.split(",");
+
+        for (int i = 0; i < array_vertice.length; i++) {
+            this.addVertice(Integer.parseInt(array_vertice[i]));
+        }
+
+        leitura = entrada.nextLine();
+
+        linhaArestas = leitura.split(";")[1];
+        array_aresta = linhaArestas.split(",");
+
+        for (int j = 0; j < array_aresta.length; j++) {
+            arestas = array_aresta[j].split("-");
+            origem = Integer.parseInt(arestas[0]);
+            destino = Integer.parseInt(arestas[1]);
+            peso = Integer.parseInt(arestas[2]);
+            // System.out.println("O: " + origem + " D: " + destino + " P: " + peso);
+
+            this.addAresta(origem, destino, peso);
+        }
+        entrada.close();
 
     }
 
@@ -94,12 +130,47 @@ public class Grafo {
      * Salvar grafo em um arquivo
      * 
      * @param nomeArquivo nome do arquivo de destino
+     * @throws IOException
      */
-    public void salvar(String nomeArquivo) {
-        try {
-            ArqCriar.criar(nomeArquivo);
-        } catch (IOException e) {
+    public void salvar(String nomeArquivo) throws IOException {
+        FileWriter arq = new FileWriter("./codigo/projeto2-grafos/arquivos/" + nomeArquivo + ".csv");
+        PrintWriter gravarArq = new PrintWriter(arq);
+
+        StringBuilder idVert = new StringBuilder();
+        StringBuilder idArest = new StringBuilder();
+
+        for (int i = 1; i <= this.ordem(); i++) {
+            Vertice vertice = vertices.find(i);
+            if(vertice != null)
+                idVert.append(vertice.getId());
+            if (i < this.ordem())
+                idVert.append(",");
+
+            /*
+             * Pega o vértice da iteração e verifica se ele tem aresta com outros
+             * ex: para o vértice 1, vai verificar se existe aresta dele com o vértice 2 (e
+             * faz essa verificação para todos os outras vertics)
+             */
+            for (int j = i + 1; j <= this.ordem(); j++) {
+                Aresta aresta = vertice.existeAresta(j);
+                if (aresta != null) {
+                    idArest.append(vertice.getId());
+                    idArest.append("-");
+                    idArest.append(aresta.destino());
+                    idArest.append("-");
+                    idArest.append(aresta.peso());
+                    idArest.append(",");
+                }
+            }
         }
+        String idArestStr = idArest.toString();
+
+        gravarArq.write("vertice;");
+        gravarArq.write(idVert.toString() + ";");
+        gravarArq.write("\naresta;");
+        gravarArq.write(idArestStr.substring(0, idArestStr.length() - 1) + ";");
+
+        arq.close();
     }
 
     /**
@@ -116,10 +187,18 @@ public class Grafo {
     }
 
     public Vertice removeVertice(int id) {
+        Vertice vertice = vertices.find(id);
+        if (vertice != null) {
+            vertices.remove(id);
+            return vertice;
+        }
         return null;
     }
 
     public Vertice existeVertice(int idVertice) {
+        Vertice vertice = vertices.find(idVertice);
+        if (vertice != null)
+            return vertice;
         return null;
     }
 
@@ -142,7 +221,6 @@ public class Grafo {
             adicionou = (saida.addAresta(destino, peso) && chegada.addAresta(origem, peso));
         }
         return adicionou;
-
     }
 
     public Aresta removeAresta(int origem, int destino) {
@@ -150,6 +228,12 @@ public class Grafo {
     }
 
     public Aresta existeAresta(int verticeA, int verticeB) {
+        Vertice verA = this.existeVertice(verticeA);
+        Vertice verB = this.existeVertice(verticeB);
+
+        if (verA != null && verB != null) {
+            return verA.existeAresta(verticeB);
+        }
         return null;
     }
 
@@ -157,20 +241,24 @@ public class Grafo {
         return false;
     }
 
+    /**
+     * 
+     * @param vertices Recebe uma lista de vértices, para criar o subgrafo
+     * @return Subgrafo
+     */
+
     public Grafo subGrafo(Lista<Integer> vertices) {
         Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
-        int vetor[] = vertices.allElements();
+        Integer vetor[] = new Integer[vertices.size()];
+        vetor = vertices.allElements(vetor);
 
         for (int i = 0; i < vetor.length; i++) {
             subgrafo.addVertice(vetor[i]);
+        }
+        for (int i = 0; i < vetor.length; i++) {
             for (int x = 0; x < vetor.length; x++) {
-                if (Grafo.existeAresta(vetor[i], vetor[x]) && subgrafo.existeVertice(vetor[x])) { // Grafo original
-                                                                                                  // possui aresta? O
-                                                                                                  // vértice já existe
-                                                                                                  // no Subgrafo?
-
+                if ((this.existeAresta(vetor[i], vetor[x]) != null) && (subgrafo.existeVertice(vetor[x]) != null)) {
                     subgrafo.addAresta(vetor[i], vetor[x], 0); // Se sim, adiciona essa aresta no subgrafo
-
                 }
             }
         }
@@ -182,7 +270,7 @@ public class Grafo {
     }
 
     public int ordem() {
-        return Integer.MIN_VALUE;
+        return this.vertices.size();
     }
 
 }
