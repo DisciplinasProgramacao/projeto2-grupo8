@@ -26,7 +26,11 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-        Grafo grafo = new Grafo("grafo");
+        limparTela();
+        System.out.println("Nome do arquivo: ");
+        String nomeArquivo = teclado.nextLine();
+
+        Grafo grafo = new Grafo(nomeArquivo);
         int opcao = -1;
 
         do {
@@ -34,10 +38,11 @@ public class App {
             limparTela();
             switch (opcao) {
                 case 1:
-                    grafo.carregar("Arquivo");
+                    grafo.carregar(nomeArquivo); //verificar se o arq ja existe
                     break;
                 case 2:
-                    grafo.salvar("Arquivo");
+                    montarGrafo(grafo);
+                    grafo.salvar(nomeArquivo);
                     break;
                 case 3:
 
@@ -55,6 +60,39 @@ public class App {
 
         } while (opcao != 0);
         System.out.println("Saindo...");
+    }
+
+    private static void montarGrafo(Grafo grafo){
+        System.out.println("Tamanho do grafo: ");
+        int tamanho = Integer.parseInt(teclado.nextLine());
+        int opcao;
+
+        for(int i = 1; i <= tamanho; i++){
+            grafo.addVertice(i);
+        }
+
+        do{
+            System.out.println("Arestas (Formato: 1 2 3 [origem destino peso]): ");
+            String arestas = teclado.nextLine();
+
+            while(arestas.split(" ").length != 3){
+                System.out.println("Formato de aresta inválido, digite novamente: ");
+                System.out.println("Arestas (Formato: 1 2 3 [origem destino peso]): ");
+                arestas = teclado.nextLine();
+            }
+
+            String[] dadosAresta = arestas.split(" ");
+            int origem = Integer.parseInt(dadosAresta[0]);
+            int destino = Integer.parseInt(dadosAresta[1]);
+            int peso = Integer.parseInt(dadosAresta[2]);
+
+            grafo.addAresta(origem, destino, peso);
+
+            limparTela();
+            System.out.println("Digite um número para continuar a adicionar arestas ou 0 para sair: ");
+            opcao = Integer.parseInt(teclado.nextLine());
+
+        }while(opcao != 0);
     }
 
 }

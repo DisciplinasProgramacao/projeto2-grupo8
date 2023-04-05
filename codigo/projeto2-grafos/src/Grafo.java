@@ -138,32 +138,27 @@ public class Grafo {
         StringBuilder idVert = new StringBuilder();
         StringBuilder idArest = new StringBuilder();
 
-        /*Scanner entrada = new Scanner(System.in);
-        System.out.println("Quantidade de vértices: "); //Dúvida: essa parte deveria ser a ordem do grafo, então chamaria o método ordem, mas a primeira vez q o grafo for criado não terá essa ordem então deve ser feito dessa forma?
-        int quantidadeVertices = entrada.nextInt();
 
-        for(int i = 1; i <= quantidadeVertices; i++){
-            idVert.append(i);
-            if(i < quantidadeVertices)
-                idVert.append(",");
-        }*/
-
-
-        for (int i = 0; i < vertices.size(); i++) {
-            Vertice vertice = vertices.find(i); //pra que isso?
-            if (idVert.toString() != "")
-                idVert.append(",");
+        for (int i = 1; i <= this.ordem(); i++) {
+            Vertice vertice = vertices.find(i);
             idVert.append(vertice.getId());
+            if (i < this.ordem())
+                idVert.append(",");            
 
-            for (int j = 0; i < vertice.getAresta().size(); i++) {
-                Aresta aresta = vertice.getAresta().find(j);
-                if (idArest.toString() != "")
-                    idArest.append(",");
-                idArest.append(vertice.getId());
-                idArest.append("-");
-                idArest.append(aresta.destino());
-                idArest.append("-");
-                idArest.append(aresta.peso());
+            /*Pega o vértice da iteração e verifica se ele tem aresta com outros
+             * ex: para o vértice 1, vai verificar se existe aresta dele com o vértice 2 (e faz essa verificação para todos os outras vertics)
+            */
+            for (int j = i+1; j <= this.ordem(); j++) {
+                Aresta aresta = vertice.existeAresta(j);
+                if(aresta != null){
+                    if (idArest.toString() != "")
+                        idArest.append(",");
+                    idArest.append(vertice.getId());
+                    idArest.append("-");
+                    idArest.append(aresta.destino());
+                    idArest.append("-");
+                    idArest.append(aresta.peso());
+                }
             }
         }
         gravarArq.write("vertice;");
@@ -222,7 +217,6 @@ public class Grafo {
             adicionou = (saida.addAresta(destino, peso) && chegada.addAresta(origem, peso));
         }
         return adicionou;
-
     }
 
     public Aresta removeAresta(int origem, int destino) {
