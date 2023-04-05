@@ -70,7 +70,8 @@ public class Grafo {
     }
 
     /**
-     * Construtor. Cria um grafo vazio com um nome escolhido pelo usuário. Em caso de nome não informado
+     * Construtor. Cria um grafo vazio com um nome escolhido pelo usuário. Em caso
+     * de nome não informado
      * (string vazia), recebe o nome genérico "Grafo"
      */
     public Grafo(String nome) {
@@ -99,11 +100,11 @@ public class Grafo {
         String vertices, linhaArestas;
         String[] array_vertice, array_aresta, arestas;
         int origem, destino, peso;
-        
+
         vertices = leitura.split(";")[1];
         array_vertice = vertices.split(",");
 
-        for(int i = 0; i < array_vertice.length; i++){
+        for (int i = 0; i < array_vertice.length; i++) {
             this.addVertice(Integer.parseInt(array_vertice[i]));
         }
 
@@ -112,12 +113,12 @@ public class Grafo {
         linhaArestas = leitura.split(";")[1];
         array_aresta = linhaArestas.split(",");
 
-        for(int j = 0; j < array_aresta.length; j++){
+        for (int j = 0; j < array_aresta.length; j++) {
             arestas = array_aresta[j].split("-");
             origem = Integer.parseInt(arestas[0]);
             destino = Integer.parseInt(arestas[1]);
             peso = Integer.parseInt(arestas[2]);
-            //System.out.println("O: " + origem + " D: " + destino + " P: " + peso);
+            // System.out.println("O: " + origem + " D: " + destino + " P: " + peso);
 
             this.addAresta(origem, destino, peso);
         }
@@ -138,33 +139,35 @@ public class Grafo {
         StringBuilder idVert = new StringBuilder();
         StringBuilder idArest = new StringBuilder();
 
-
         for (int i = 1; i <= this.ordem(); i++) {
             Vertice vertice = vertices.find(i);
             idVert.append(vertice.getId());
             if (i < this.ordem())
-                idVert.append(",");            
+                idVert.append(",");
 
-            /*Pega o vértice da iteração e verifica se ele tem aresta com outros
-             * ex: para o vértice 1, vai verificar se existe aresta dele com o vértice 2 (e faz essa verificação para todos os outras vertics)
-            */
-            for (int j = i+1; j <= this.ordem(); j++) {
+            /*
+             * Pega o vértice da iteração e verifica se ele tem aresta com outros
+             * ex: para o vértice 1, vai verificar se existe aresta dele com o vértice 2 (e
+             * faz essa verificação para todos os outras vertics)
+             */
+            for (int j = i + 1; j <= this.ordem(); j++) {
                 Aresta aresta = vertice.existeAresta(j);
-                if(aresta != null){
-                    if (idArest.toString() != "")
-                        idArest.append(",");
+                if (aresta != null) {
                     idArest.append(vertice.getId());
                     idArest.append("-");
                     idArest.append(aresta.destino());
                     idArest.append("-");
                     idArest.append(aresta.peso());
+                    idArest.append(",");
                 }
             }
         }
+        String idArestStr = idArest.toString();
+
         gravarArq.write("vertice;");
         gravarArq.write(idVert.toString() + ";");
         gravarArq.write("\naresta;");
-        gravarArq.write(idArest.toString() + ";");
+        gravarArq.write(idArestStr.substring(0, idArestStr.length() - 1) + ";");
 
         arq.close();
     }
@@ -184,7 +187,7 @@ public class Grafo {
 
     public Vertice removeVertice(int id) {
         Vertice vertice = vertices.find(id);
-        if(vertice != null){
+        if (vertice != null) {
             vertices.remove(id);
             return vertice;
         }
@@ -193,7 +196,7 @@ public class Grafo {
 
     public Vertice existeVertice(int idVertice) {
         Vertice vertice = vertices.find(idVertice);
-        if(vertice != null)
+        if (vertice != null)
             return vertice;
         return null;
     }
@@ -226,8 +229,8 @@ public class Grafo {
     public Aresta existeAresta(int verticeA, int verticeB) {
         Vertice verA = this.existeVertice(verticeA);
         Vertice verB = this.existeVertice(verticeB);
-        
-        if(verA != null && verB != null){
+
+        if (verA != null && verB != null) {
             return verA.existeAresta(verticeB);
         }
         return null;
