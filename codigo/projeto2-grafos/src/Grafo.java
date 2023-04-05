@@ -1,8 +1,10 @@
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -68,8 +70,7 @@ public class Grafo {
     }
 
     /**
-     * Construtor. Cria um grafo vazio com um nome escolhido pelo usuário. Em caso
-     * de nome não informado
+     * Construtor. Cria um grafo vazio com um nome escolhido pelo usuário. Em caso de nome não informado
      * (string vazia), recebe o nome genérico "Grafo"
      */
     public Grafo(String nome) {
@@ -91,27 +92,36 @@ public class Grafo {
     }
 
     public void carregar(String nomeArquivo) throws FileNotFoundException, EOFException {
-        ArqLeitura arquivo_vertice = new ArqLeitura(nomeArquivo + ".csv");
-        ArqLeitura arquivo_aresta = new ArqLeitura(nomeArquivo + ".csv");
+        File file = new File("./codigo/projeto2-grafos/arquivos/" + nomeArquivo + ".csv");
+        Scanner entrada = new Scanner(file, "UTF-8");
 
-        String retorno;
-        String[] array, array_vertice;
+        String leitura = entrada.nextLine();
+        String vertices, linhaArestas;
+        String[] array_vertice, array_aresta, arestas;
+        int origem, destino, peso;
+        
+        vertices = leitura.split(";")[1];
+        array_vertice = vertices.split(",");
 
-        // Caso queira retornar arresta basta digitar 1 vertice 2 e assim sucessivamente
-        retorno = arquivo_vertice.ler(1);
-        array = retorno.split(",");
-        for (int i = 0; i < array.length; i++) {
-            this.addVertice(Integer.parseInt(array[i]));
+        for(int i = 0; i < array_vertice.length; i++){
+            this.addVertice(Integer.parseInt(array_vertice[i]));
         }
-        retorno = null;
-        array = null;
-        retorno = arquivo_aresta.ler(2);
-        array = retorno.split(",");
-        for (int i = 0; i < array.length; i++) {
-            array_vertice = array[i].split("-");
-            this.addAresta(Integer.parseInt(array_vertice[0]), Integer.parseInt(array_vertice[1]),
-                    Integer.parseInt(array_vertice[2]));
+
+        leitura = entrada.nextLine();
+
+        linhaArestas = leitura.split(";")[1];
+        array_aresta = linhaArestas.split(",");
+
+        for(int j = 0; j < array_aresta.length; j++){
+            arestas = array_aresta[j].split("-");
+            origem = Integer.parseInt(arestas[0]);
+            destino = Integer.parseInt(arestas[1]);
+            peso = Integer.parseInt(arestas[2]);
+            //System.out.println("O: " + origem + " D: " + destino + " P: " + peso);
+
+            this.addAresta(origem, destino, peso);
         }
+        entrada.close();
 
     }
 
@@ -128,8 +138,19 @@ public class Grafo {
         StringBuilder idVert = new StringBuilder();
         StringBuilder idArest = new StringBuilder();
 
+        /*Scanner entrada = new Scanner(System.in);
+        System.out.println("Quantidade de vértices: "); //Dúvida: essa parte deveria ser a ordem do grafo, então chamaria o método ordem, mas a primeira vez q o grafo for criado não terá essa ordem então deve ser feito dessa forma?
+        int quantidadeVertices = entrada.nextInt();
+
+        for(int i = 1; i <= quantidadeVertices; i++){
+            idVert.append(i);
+            if(i < quantidadeVertices)
+                idVert.append(",");
+        }*/
+
+
         for (int i = 0; i < vertices.size(); i++) {
-            Vertice vertice = vertices.find(i);
+            Vertice vertice = vertices.find(i); //pra que isso?
             if (idVert.toString() != "")
                 idVert.append(",");
             idVert.append(vertice.getId());
@@ -147,7 +168,7 @@ public class Grafo {
         }
         gravarArq.write("vertice;");
         gravarArq.write(idVert.toString() + ";");
-        gravarArq.write(";\naresta;");
+        gravarArq.write("\naresta;");
         gravarArq.write(idArest.toString() + ";");
 
         arq.close();
@@ -167,10 +188,18 @@ public class Grafo {
     }
 
     public Vertice removeVertice(int id) {
+        Vertice vertice = vertices.find(id);
+        if(vertice != null){
+            vertices.remove(id);
+            return vertice;
+        }
         return null;
     }
 
     public Vertice existeVertice(int idVertice) {
+        Vertice vertice = vertices.find(idVertice);
+        if(vertice != null)
+            return vertice;
         return null;
     }
 
@@ -201,6 +230,12 @@ public class Grafo {
     }
 
     public Aresta existeAresta(int verticeA, int verticeB) {
+        Vertice verA = this.existeVertice(verticeA);
+        Vertice verB = this.existeVertice(verticeB);
+        
+        if(verA != null && verB != null){
+            return verA.existeAresta(verticeB);
+        }
         return null;
     }
 
@@ -225,9 +260,7 @@ public class Grafo {
         for (int i = 0; i < vetor.length; i++) {
             for (int x = 0; x < vetor.length; x++) {
                 if ((this.existeAresta(vetor[i], vetor[x]) != null) && (subgrafo.existeVertice(vetor[x]) != null)) {
-
                     subgrafo.addAresta(vetor[i], vetor[x], 0); // Se sim, adiciona essa aresta no subgrafo
-
                 }
             }
         }
@@ -239,7 +272,7 @@ public class Grafo {
     }
 
     public int ordem() {
-        return Integer.MIN_VALUE;
+        return this.vertices.size();
     }
 
 }
