@@ -49,10 +49,6 @@ public class Vertice {
         return this.id;
     }
 
-    public ABB<Aresta> getAresta() {
-        return this.arestas;
-    }
-
     public boolean addAresta(int destino) {
         return false;
     }
@@ -69,8 +65,7 @@ public class Vertice {
     }
 
     public Aresta existeAresta(int destino) {
-        return null;
-
+        return this.arestas.find(destino);
     }
 
     /**
@@ -85,7 +80,7 @@ public class Vertice {
     }
 
     public int grau() {
-        return Integer.MIN_VALUE;
+        return this.arestas.size();
     }
 
     /**
