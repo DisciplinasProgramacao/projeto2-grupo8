@@ -237,7 +237,7 @@ public class Grafo {
     //To Do
     public boolean completo() {
         
-        int ordem = this.vertices.ordem();
+        int ordem = this.ordem();
 
         for (int i = 1; i <= ordem; i++) {
             for (int j = i + 1; j <= ordem; j++) {
