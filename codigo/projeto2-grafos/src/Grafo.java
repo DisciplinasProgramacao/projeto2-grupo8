@@ -118,7 +118,6 @@ public class Grafo {
             origem = Integer.parseInt(arestas[0]);
             destino = Integer.parseInt(arestas[1]);
             peso = Integer.parseInt(arestas[2]);
-            // System.out.println("O: " + origem + " D: " + destino + " P: " + peso);
 
             this.addAresta(origem, destino, peso);
         }

@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public class GrafoTest {
+public class GrafoTeste {
     private Grafo grafo;
 
     @BeforeEach
@@ -20,17 +20,11 @@ public class GrafoTest {
     }
 
     @Test 
-
-    public void deveAdicionarUmVerticeComOId1() {
-        Vertice vertice = new Vertice(1);
-
-        this.grafo.addVertice(vertice);
-
-        assertEquals(1, this.grafo.numVertices());
+    public void deveAdicionarUmVerticeComIdUm() {        
+        assertTrue(grafo.addVertice(1));
     }
 
     @Test
-
     public void adicionaArestaPonderada() {
         
 
@@ -43,7 +37,6 @@ public class GrafoTest {
     }
 
     @Test 
-
     public void testaSubGrado(){
 
         Lista<Integer> minhaLista = new Lista<>();
