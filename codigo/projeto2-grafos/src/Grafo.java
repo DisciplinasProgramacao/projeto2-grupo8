@@ -234,7 +234,6 @@ public class Grafo {
         return null;
     }
 
-    //To Do
     public boolean completo() {
         
         int ordem = this.ordem();
@@ -274,7 +273,17 @@ public class Grafo {
     }
     //To Do
     public int tamanho() {
-        return Integer.MIN_VALUE;
+        int vertices = this.ordem();
+        int arestas = 0;
+
+        for (int i = 1; i <= vertices; i++) {
+            for (int j = i + 1; j <= vertices; j++) {
+                if (!this.existeAresta(i, j)) {             
+                    arestas++;
+                }
+            }
+        }
+        return arestas + vertices;
     }
 
     public int ordem() {

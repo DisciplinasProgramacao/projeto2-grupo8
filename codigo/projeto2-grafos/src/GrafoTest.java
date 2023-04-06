@@ -137,5 +137,15 @@ public class GrafoTest {
         assertNotNull(meuGrafo.existeAresta(1, 2));
         assertNotNull(meuGrafo.existeAresta(2, 3));
     }
+    @Test
+    public void calculaTamanho(){
+        meuGrafo.addVertice(1);
+        meuGrafo.addVertice(2);
+        meuGrafo.addVertice(3);
 
+        meuGrafo.addAresta(1,2);
+        meuGrafo.addAresta(1,3);
+
+        assertEquals(5, meuGrafo.tamanho());
+    }
 }
