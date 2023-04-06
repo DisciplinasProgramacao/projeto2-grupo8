@@ -240,7 +240,7 @@ public class Grafo {
 
         for (int i = 1; i <= ordem; i++) {
             for (int j = i + 1; j <= ordem; j++) {
-                if (!this.existeAresta(i, j)) {             
+                if (this.existeAresta(i, j) == null) {             
                     return false;
                 }
             }
@@ -271,14 +271,14 @@ public class Grafo {
         }
         return subgrafo;
     }
-    //To Do
+
     public int tamanho() {
         int vertices = this.ordem();
         int arestas = 0;
 
         for (int i = 1; i <= vertices; i++) {
             for (int j = i + 1; j <= vertices; j++) {
-                if (!this.existeAresta(i, j)) {             
+                if (this.existeAresta(i, j) != null) {             
                     arestas++;
                 }
             }
