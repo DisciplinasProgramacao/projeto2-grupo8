@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
@@ -20,7 +21,7 @@ public class GrafoTest {
 
     @BeforeEach
     public void prepare() {
-        meuGrafo = new Grafo();    
+        meuGrafo = new Grafo(" ");    
     }
 
     /*@AfterEach
@@ -29,38 +30,31 @@ public class GrafoTest {
     }    */
 
     @Test
-    public void deveRetornarMensagemCasoOrdemDoGrafoMenorQueZero(){
-        meuGrafo.grafoCompleto(-4);
-        assertEquals(output.toString(), "Ordem do grafo deve ser maior que zero");
+    public void deveRetornarNuloCasoOrdemDoGrafoMenorQueZero(){        
+        assertNull(Grafo.grafoCompleto(-4));
     }
 
     @Test
     public void deveRetornarFalseCasoExistaAresta(){
         meuGrafo.addAresta(4,5,1);
-        assertFalse(meuGrafo.addAresta());
+        assertFalse(meuGrafo.addAresta(4,5,5));
     }
 
     @Test
     public void deveRetornarTrueCasoNaoExistaAresta(){
         meuGrafo.addAresta(2,3,1);
-        assertTrue(meuGrafo.addAresta());
+        assertTrue(meuGrafo.addAresta(2,3,1));
     }
 
     @Test
     public void deveRetornarFalsoCasoExistaVertice(){
-        meuGrafo.addAresta(1,3,1);
-        assertFalse(meuGrafo.addVertice());
+        meuGrafo.addVertice(1);
+        assertFalse(meuGrafo.addVertice(1));
     }
 
     @Test
-    public void deveRetornarFalsoCasoNaoExistaVertice(){
-        meuGrafo.addAresta(1,3,1);
-        assertTrue(meuGrafo.addVertice());
+    public void deveRetornarVerdadeiroCasoNaoExistaVertice(){
+        assertTrue(meuGrafo.addVertice(900));
     }
 
-    @Test
-    public void deveRetornarTrueCasoNaoExistaVertice(){
-        meuGrafo.addAresta(3,4,1);
-        assertTrue(meuGrafo.addVertice());
-    }
 }
