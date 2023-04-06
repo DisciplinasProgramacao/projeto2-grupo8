@@ -51,9 +51,6 @@ public class Aresta {
         this.visitada = false;
     }
 
-
-
-
     /**
      * Método de acesso para o peso da aresta
      * @return Peso da aresta (int)
