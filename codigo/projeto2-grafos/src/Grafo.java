@@ -145,20 +145,17 @@ public class Grafo {
             if (i < this.ordem())
                 idVert.append(",");
 
-            /*
-             * Pega o vértice da iteração e verifica se ele tem aresta com outros
-             * ex: para o vértice 1, vai verificar se existe aresta dele com o vértice 2 (e
-             * faz essa verificação para todos os outras vertics)
-             */
             for (int j = i + 1; j <= this.ordem(); j++) {
-                Aresta aresta = vertice.existeAresta(j);
-                if (aresta != null) {
-                    idArest.append(vertice.getId());
-                    idArest.append("-");
-                    idArest.append(aresta.destino());
-                    idArest.append("-");
-                    idArest.append(aresta.peso());
-                    idArest.append(",");
+                if(vertice != null){
+                    Aresta aresta = vertice.existeAresta(j);
+                    if (aresta != null) {
+                        idArest.append(vertice.getId());
+                        idArest.append("-");
+                        idArest.append(aresta.destino());
+                        idArest.append("-");
+                        idArest.append(aresta.peso());
+                        idArest.append(",");
+                    }
                 }
             }
         }

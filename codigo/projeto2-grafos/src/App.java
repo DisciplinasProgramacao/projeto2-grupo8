@@ -49,10 +49,9 @@ public class App {
                     }catch(FileNotFoundException e){
                         System.out.println("Arquivo não existente, você deve primeiro salvar o grafo" + e);
                     }
-                    grafo.carregar(nomeArquivo); //verificar se o arq ja existe
                     break;
                 case 2:
-                    montarGrafo(grafo);
+                    //montarGrafo(grafo);
                     grafo.salvar(nomeArquivo);
                     break;
                 case 3:
@@ -64,7 +63,7 @@ public class App {
                 case 5:
                     System.out.println("Ordem do grafo: ");
                     int ordem = Integer.parseInt(teclado.nextLine());
-                    Grafo.grafoCompleto(ordem);
+                    grafo = Grafo.grafoCompleto(ordem);
                     break;
                 case 6:
                     Grafo subGrafo = gerarSubGrafo(grafo); //Verificar como preencher o arquivo nesse caso
