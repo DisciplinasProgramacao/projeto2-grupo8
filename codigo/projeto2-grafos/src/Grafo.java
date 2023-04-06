@@ -36,7 +36,7 @@ import java.util.logging.Logger;
  * Classe básica para um Grafo simples não direcionado.
  */
 public class Grafo {
-    private static final Logger logger = Logger.getLogger(Grafo.class.getName());
+    protected static final Logger logger = Logger.getLogger(Grafo.class.getName());
     public final String nome;
     private ABB<Vertice> vertices;
 
