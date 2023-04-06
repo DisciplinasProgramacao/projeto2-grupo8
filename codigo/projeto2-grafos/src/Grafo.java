@@ -236,7 +236,17 @@ public class Grafo {
 
     //To Do
     public boolean completo() {
-        return false;
+        
+        int ordem = this.vertices.ordem();
+
+        for (int i = 1; i <= ordem; i++) {
+            for (int j = i + 1; j <= ordem; j++) {
+                if (!this.existeAresta(i, j)) {             
+                    return false;
+                }
+            }
+        }
+    return true;
     }
 
     /**

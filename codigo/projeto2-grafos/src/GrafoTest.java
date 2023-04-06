@@ -28,11 +28,12 @@ public class GrafoTest {
         assertNull(Grafo.grafoCompleto(-4));
     }
     @Test
-    public void criaGrafoCompleto(){
+    public void criaGrafoCompletoRetornaCompleto(){
         meuGrafo.grafoCompleto(6);
 
         assertNotNull(meuGrafo.existeAresta(1,2));
         assertNotNull(meuGrafo.existeVertice(6));
+        assertTrue(meuGrafo.completo());
     }
 
     @Test
@@ -92,6 +93,23 @@ public class GrafoTest {
 
         assertEquals(0, arestaAdicionada.peso());;
     }    
+
+    @Test
+    public void deveRemoverVertice(){
+        meuGrafo.addVertice(1);
+        meuGrafo.addVertice(2);
+        meuGrafo.removeVertice(2);
+        assertNull(meuGrafo.existeVertice(2));
+    }
+    //Não ta funcionando ainda
+    @Test
+    public void deveRemoverAresta(){
+        meuGrafo.addVertice(1);
+        meuGrafo.addVertice(2);
+        meuGrafo.addAresta(1,2);
+        meuGrafo.removeAresta(1,2);
+        assertNull(meuGrafo.existeAresta(1,2));
+    }
 
     @Test 
     public void naoDeveRetornarNuloCasoArestasEVerticesSejamAdicionadosNoSubgrafo(){
