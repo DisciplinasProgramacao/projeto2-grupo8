@@ -27,6 +27,22 @@ public class GrafoTest {
     public void deveRetornarNuloCasoOrdemDoGrafoMenorQueZero(){        
         assertNull(Grafo.grafoCompleto(-4));
     }
+    @Test
+    public void criaGrafoCompleto(){
+        meuGrafo.grafoCompleto(6);
+
+        assertNotNull(meuGrafo.existeAresta(1,2));
+        assertNotNull(meuGrafo.existeVertice(6));
+    }
+
+    @Test
+    public void retornaOrdem(){
+
+        meuGrafo.addVertice(1);
+        meuGrafo.addVertice(2);
+
+        assertEquals(2, meuGrafo.ordem());
+    }
 
     @Test
     public void deveRetornarFalseCasoExistaAresta(){
@@ -42,7 +58,6 @@ public class GrafoTest {
 
     @Test
     public void deveRetornarFalsoCasoExistaVertice(){
-        meuGrafo.addVertice(1);
         assertFalse(meuGrafo.addVertice(1));
     }
 

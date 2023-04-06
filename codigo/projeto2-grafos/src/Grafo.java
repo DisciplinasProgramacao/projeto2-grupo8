@@ -219,6 +219,7 @@ public class Grafo {
         return adicionou;
     }
 
+    //To Do
     public Aresta removeAresta(int origem, int destino) {
         return null;
     }
@@ -233,6 +234,7 @@ public class Grafo {
         return null;
     }
 
+    //To Do
     public boolean completo() {
         return false;
     }
@@ -260,7 +262,7 @@ public class Grafo {
         }
         return subgrafo;
     }
-
+    //To Do
     public int tamanho() {
         return Integer.MIN_VALUE;
     }
