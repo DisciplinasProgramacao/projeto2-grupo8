@@ -39,7 +39,7 @@ public class Grafo {
     protected static final Logger logger = Logger.getLogger(Grafo.class.getName());
     public final String nome;
     protected ABB<Vertice> vertices;
-
+    
     /*
      * Cria e retorna o grafo completo de acordo com a ordem recebida. Caso a ordem
      * seja menor ou igual a zero ignora e exibe um warning
@@ -54,19 +54,20 @@ public class Grafo {
             return null;
         }
 
-        Grafo grafoCompleto = new Grafo("grafoCompleto");
+        //Grafo grafoCompleto = new Grafo("grafoCompleto");
+        GrafoMutavel grafoMutav = new GrafoMutavel("grafoMutav");
 
         for (int i = 1; i <= ordem; i++) {
-            grafoCompleto.addVertice(i);
+            grafoMutav.addVertice(i);
         }
 
         for (int origem = 1; origem <= ordem; origem++) {
             for (int destino = origem + 1; destino <= ordem + 1; destino++) {
-                grafoCompleto.addAresta(origem, destino, 0);
+                grafoMutav.addAresta(origem, destino, 0);
             }
         }
 
-        return grafoCompleto;
+        return grafoMutav;
     }
 
     /**
@@ -120,21 +121,22 @@ public class Grafo {
      */
 
     public Grafo subGrafo(Lista<Integer> vertices) {
-        Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
+        //Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
+        GrafoMutavel subGrafoMutavel = new GrafoMutavel("Subgrafo de" + this.nome);
         Integer vetor[] = new Integer[vertices.size()];
         vetor = vertices.allElements(vetor);
 
         for (int i = 0; i < vetor.length; i++) {
-            subgrafo.addVertice(vetor[i]);
+            subGrafoMutavel.addVertice(vetor[i]);
         }
         for (int i = 0; i < vetor.length; i++) {
             for (int x = 0; x < vetor.length; x++) {
                 if ((this.existeAresta(vetor[i], vetor[x]) != null) && (subgrafo.existeVertice(vetor[x]) != null)) {
-                    subgrafo.addAresta(vetor[i], vetor[x], 0); // Se sim, adiciona essa aresta no subgrafo
+                    subGrafoMutavel.addAresta(vetor[i], vetor[x], 0); // Se sim, adiciona essa aresta no subgrafo
                 }
             }
         }
-        return subgrafo;
+        return subGrafoMutavel;
     }
 
     public int tamanho() {
