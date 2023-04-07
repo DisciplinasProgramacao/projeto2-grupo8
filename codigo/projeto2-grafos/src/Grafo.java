@@ -104,7 +104,17 @@ public class Grafo {
     }
 
     public boolean completo() {
-        return false;
+        
+        int ordem = this.ordem();
+
+        for (int i = 1; i <= ordem; i++) {
+            for (int j = i + 1; j <= ordem; j++) {
+                if (this.existeAresta(i, j) == null) {             
+                    return false;
+                }
+            }
+        }
+    return true;
     }
 
     /**
@@ -133,7 +143,17 @@ public class Grafo {
     }
 
     public int tamanho() {
-        return Integer.MIN_VALUE;
+        int vertices = this.ordem();
+        int arestas = 0;
+
+        for (int i = 1; i <= vertices; i++) {
+            for (int j = i + 1; j <= vertices; j++) {
+                if (this.existeAresta(i, j) != null) {             
+                    arestas++;
+                }
+            }
+        }
+        return arestas + vertices;
     }
 
     public int ordem() {
