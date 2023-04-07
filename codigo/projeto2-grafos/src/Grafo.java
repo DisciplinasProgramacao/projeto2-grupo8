@@ -1,10 +1,3 @@
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -131,7 +124,7 @@ public class Grafo {
         }
         for (int i = 0; i < vetor.length; i++) {
             for (int x = 0; x < vetor.length; x++) {
-                if ((this.existeAresta(vetor[i], vetor[x]) != null) && (subgrafo.existeVertice(vetor[x]) != null)) {
+                if ((this.existeAresta(vetor[i], vetor[x]) != null) && (subGrafoMutavel.existeVertice(vetor[x]) != null)) {
                     subGrafoMutavel.addAresta(vetor[i], vetor[x], 0); // Se sim, adiciona essa aresta no subgrafo
                 }
             }
