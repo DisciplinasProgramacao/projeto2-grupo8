@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
@@ -34,7 +35,10 @@ public class App {
     public static void main(String[] args) throws Exception {
         limparTela();
 
+        String nomeArquivo;
         Grafo grafo = new Grafo("");
+        GrafoMutavel grafoMutavel = new GrafoMutavel("");
+
         int opcao = -1;
 
         do {
@@ -42,18 +46,24 @@ public class App {
             limparTela();
             switch (opcao) {
                 case 1:
-                    System.out.println("Nome do arquivo: ");
-                    String nomeArquivo = teclado.nextLine();
-
+                    System.out.println("Nome do arquivo a ser carregado: ");
+                    nomeArquivo = teclado.nextLine();
+                    
                     try{
-                        grafo.carregar(nomeArquivo); //precisa acessar o método carregar que tá dentro de grafoMutavel
+                        grafoMutavel.carregar(nomeArquivo);
                     }catch(FileNotFoundException e){
-                        System.out.println("Arquivo não existente, você deve primeiro gerar e salvar o grafo" + e);
+                        System.out.println("Arquivo não existente, você deve primeiro gerar e salvar o grafo " + e);
                     }
                     break;
                 case 2:
-                    //montarGrafo(grafo);
-                    //grafo.salvar(nomeArquivo);
+                    System.out.println("Nome do arquivo: ");
+                    nomeArquivo = teclado.nextLine();
+                    try{                        
+                        grafoMutavel.salvar(nomeArquivo);
+                    }catch(Exception e){
+                        System.out.println("Não existe grafo para ser salvo, você deve primeiro gerar o grafo " + e);
+                    }
+                    
                     break;
                 case 3:
 
@@ -67,9 +77,9 @@ public class App {
                     grafo = Grafo.grafoCompleto(ordem);
                     break;
                 case 6:
-                    Grafo subGrafo = gerarSubGrafo(grafo); //Verificar como preencher o arquivo nesse caso
+                    Grafo subGrafo = gerarSubGrafo(grafo);
                     //subGrafo.salvar("subgrafo");
-                    System.out.println("Arquivo de subgrafo criado"); //Posteriormente verificar a criação de um método para imprimir o arq
+                    System.out.println("Arquivo de subgrafo criado");
                     break;
             }
             pausa();
