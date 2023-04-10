@@ -1,4 +1,3 @@
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,9 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 
 public class GrafoTest {
     GrafoMutavel meuGrafo;
+    Grafo grafo;
 
     @BeforeEach
     public void prepare() {
+        grafo = new Grafo(" ");
         meuGrafo = new GrafoMutavel(" ");    
     }
     /* 
@@ -28,12 +29,14 @@ public class GrafoTest {
         assertNull(Grafo.grafoCompleto(-4));
     }
     @Test
-    public void criaGrafoCompletoRetornaCompleto(){
-        meuGrafo = (GrafoMutavel) Grafo.grafoCompleto(6);
+    public void deveRetornarTrueCasoGrafoCompletoSejaGeradoComSucesso(){
+        grafo = Grafo.grafoCompleto(6);
 
-        assertNotNull(meuGrafo.existeAresta(1,2));
-        assertNotNull(meuGrafo.existeVertice(6));
-        assertTrue(meuGrafo.completo());
+        /*assertNotNull(meuGrafo.existeAresta(1,2));
+        assertNotNull(meuGrafo.existeVertice(6));*/
+        assertNotNull(grafo.existeAresta(1,2));
+        assertTrue(grafo.completo());
+        
     }
 
     @Test

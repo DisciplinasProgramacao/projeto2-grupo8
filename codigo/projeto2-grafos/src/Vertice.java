@@ -50,7 +50,7 @@ public class Vertice {
     }
 
     public boolean addAresta(int destino) {
-        return false;
+        return this.arestas.add(destino, new Aresta(destino));
     }
 
     /**
