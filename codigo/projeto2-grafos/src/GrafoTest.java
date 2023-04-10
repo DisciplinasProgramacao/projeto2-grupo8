@@ -14,7 +14,7 @@ public class GrafoTest {
 
     @BeforeEach
     public void prepare() {
-        grafo = new Grafo(" ");
+        grafo = new Grafo("Meu Grafo Para Testes");
         meuGrafo = new GrafoMutavel(" ");    
     }
     /* 
@@ -24,18 +24,25 @@ public class GrafoTest {
     }  */
 
     @Test
-    public void deveRetornarNuloCasoOrdemDoGrafoMenorQueZero(){        
+    public void deveRetornarNuloCasoTenteGerarGrafoComOrdemMenorOuIgualAZero(){        
         assertNull(Grafo.grafoCompleto(-4));
     }
+
     @Test
     public void deveRetornarTrueCasoGrafoCompletoSejaGeradoComSucesso(){
         grafo = Grafo.grafoCompleto(6);
-
-        /*assertNotNull(meuGrafo.existeAresta(1,2));
-        assertNotNull(meuGrafo.existeVertice(6));*/
-        assertNotNull(grafo.existeAresta(1,2));
         assertTrue(grafo.completo());
-        
+    }
+
+    @Test
+    public void deveGerarGrafoComNomeBaseCasoNaoSejaInformadoPeloUsuario(){
+        Grafo grafoNomeVazio = new Grafo("");
+        assertEquals(grafoNomeVazio.nome(), "Grafo");
+    }
+
+    @Test
+    public void deveGerarGrafoComNomeInformadoPeloUsuario(){
+        assertEquals(grafo.nome(), "Meu Grafo Para Testes");
     }
 
     @Test
