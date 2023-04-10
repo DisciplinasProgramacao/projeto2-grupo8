@@ -108,7 +108,7 @@ public class Vertice {
 
     // TO DO implementar método
     public Lista<Integer> vizinhos() {
-        Lista<Integer> vizinhosList = new Lista<Integer>;
+        Lista<Integer> vizinhosList = new Lista<Integer>();
 
         if (arestas.size() != 0) {
             for (int i = 0; i < arestas.size(); i++) {
