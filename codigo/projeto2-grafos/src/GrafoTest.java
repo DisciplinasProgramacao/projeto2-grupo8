@@ -1,6 +1,5 @@
 
-
-/*import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,20 +7,21 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 public class GrafoTest {
-    Grafo meuGrafo;
+    GrafoMutavel meuGrafo;
 
     @BeforeEach
     public void prepare() {
-        meuGrafo = new Grafo(" ");    
+        meuGrafo = new GrafoMutavel(" ");    
     }
-
+    /* 
     @AfterEach
     public void limparSaida()  {
         output.reset();
-    }  
+    }  */
 
     @Test
     public void deveRetornarNuloCasoOrdemDoGrafoMenorQueZero(){        
@@ -29,7 +29,7 @@ public class GrafoTest {
     }
     @Test
     public void criaGrafoCompletoRetornaCompleto(){
-        meuGrafo.grafoCompleto(6);
+        meuGrafo = (GrafoMutavel) Grafo.grafoCompleto(6);
 
         assertNotNull(meuGrafo.existeAresta(1,2));
         assertNotNull(meuGrafo.existeVertice(6));
@@ -53,12 +53,14 @@ public class GrafoTest {
 
    @Test
     public void deveRetornarTrueCasoNaoExistaAresta(){
-        meuGrafo..
+        meuGrafo.addVertice(2);
+        meuGrafo.addVertice(3);
         assertTrue(meuGrafo.addAresta(2,3,1));
     }
 
     @Test
     public void deveRetornarFalsoCasoExistaVertice(){
+        meuGrafo.addVertice(1);
         assertFalse(meuGrafo.addVertice(1));
     }
 
@@ -106,7 +108,7 @@ public class GrafoTest {
     public void deveRemoverAresta(){
         meuGrafo.addVertice(1);
         meuGrafo.addVertice(2);
-        meuGrafo.addAresta(1,2);
+        meuGrafo.addAresta(1,2, 0);
         meuGrafo.removeAresta(1,2);
         assertNull(meuGrafo.existeAresta(1,2));
     }
@@ -127,7 +129,7 @@ public class GrafoTest {
         meuGrafo.addAresta(2, 3, 0);
         meuGrafo.addAresta(2, 4, 0);
     
-        meuGrafo = meuGrafo.subGrafo(minhaLista);
+        meuGrafo = (GrafoMutavel) meuGrafo.subGrafo(minhaLista);
 
         //TO DO olhar isso
         assertNotNull(meuGrafo.existeVertice(1));
@@ -143,9 +145,9 @@ public class GrafoTest {
         meuGrafo.addVertice(2);
         meuGrafo.addVertice(3);
 
-        meuGrafo.addAresta(1,2);
-        meuGrafo.addAresta(1,3);
+        meuGrafo.addAresta(1,2, 0);
+        meuGrafo.addAresta(1,3, 0);
 
         assertEquals(5, meuGrafo.tamanho());
     }
-}*/
+}
