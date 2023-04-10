@@ -105,4 +105,9 @@ public class Vertice {
     public boolean visitado() {
         return this.visitado;
     }
+
+    //TO DO implementar método
+    public Lista<Integer> vizinhos(){
+        return null;
+    }
 }

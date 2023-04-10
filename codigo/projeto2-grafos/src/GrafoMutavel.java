@@ -58,8 +58,7 @@ public class GrafoMutavel extends Grafo {
     public Aresta removeAresta(int origem, int destino) {
         return null;
     }
-
-    
+ 
     public void carregar(String nomeArquivo) throws FileNotFoundException, EOFException {
         File file = new File("./codigo/projeto2-grafos/arquivos/" + nomeArquivo + ".csv");
         Scanner entrada = new Scanner(file, "UTF-8");

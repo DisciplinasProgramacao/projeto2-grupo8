@@ -1,28 +1,16 @@
-import java.util.logging.Level;
-
 public class GrafoCompleto extends Grafo {
-    public GrafoCompleto(String nome) {
-        super(nome);
-    }
-
-    public Grafo GrafoCompleto(int ordem){
-        if (ordem <= 0) {
-            logger.log(Level.WARNING, "Ordem do grafo deve ser maior que zero");
-            return null;
-        }
-
-        Grafo grafoCompleto = new Grafo("grafoCompleto");
+    public GrafoCompleto(int ordem){
+        super("Grafo completo de ordem" + ordem);
 
         for (int i = 1; i <= ordem; i++) {
-            grafoCompleto.addVertice(i);
+            Vertice vertice = new Vertice(i);
+            vertices.add(i, vertice);
         }
 
         for (int origem = 1; origem <= ordem; origem++) {
             for (int destino = origem + 1; destino <= ordem + 1; destino++) {
-                grafoCompleto.addAresta(origem, destino, 0);
+                vertices.find(origem).addAresta(destino);
             }
         }
-
-        return grafoCompleto;
     }
 }

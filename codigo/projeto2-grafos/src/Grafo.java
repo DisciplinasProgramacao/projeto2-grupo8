@@ -29,8 +29,9 @@ import java.util.logging.Logger;
  * Classe básica para um Grafo simples não direcionado.
  */
 public class Grafo {
-    protected static final Logger logger = Logger.getLogger(Grafo.class.getName());
-    public final String nome;
+    private static final Logger logger = Logger.getLogger(Grafo.class.getName());
+
+    private final String nome;
     protected ABB<Vertice> vertices;
     
     /*
@@ -47,20 +48,7 @@ public class Grafo {
             return null;
         }
 
-        //Grafo grafoCompleto = new Grafo("grafoCompleto");
-        GrafoMutavel grafoMutav = new GrafoMutavel("grafoMutav");
-
-        for (int i = 1; i <= ordem; i++) {
-            grafoMutav.addVertice(i);
-        }
-
-        for (int origem = 1; origem <= ordem; origem++) {
-            for (int destino = origem + 1; destino <= ordem + 1; destino++) {
-                grafoMutav.addAresta(origem, destino, 0);
-            }
-        }
-
-        return grafoMutav;
+        return new GrafoCompleto(ordem);
     }
 
     /**
@@ -104,7 +92,6 @@ public class Grafo {
     }
 
     public boolean completo() {
-        
         int ordem = this.ordem();
 
         for (int i = 1; i <= ordem; i++) {
@@ -114,7 +101,7 @@ public class Grafo {
                 }
             }
         }
-    return true;
+        return true;
     }
 
     /**
@@ -158,6 +145,14 @@ public class Grafo {
 
     public int ordem() {
         return this.vertices.size();
+    }
+
+    public Grafo bfs(int idVerticeInicio){
+        return null;
+    }
+
+    public Grafo dfs(int idVerticeInicio){
+        return null;
     }
 
 }

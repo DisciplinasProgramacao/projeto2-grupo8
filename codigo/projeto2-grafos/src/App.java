@@ -33,10 +33,8 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         limparTela();
-        System.out.println("Nome do arquivo: ");
-        String nomeArquivo = teclado.nextLine();
 
-        Grafo grafo = new Grafo(nomeArquivo);
+        Grafo grafo = new Grafo("");
         int opcao = -1;
 
         do {
@@ -44,10 +42,13 @@ public class App {
             limparTela();
             switch (opcao) {
                 case 1:
+                    System.out.println("Nome do arquivo: ");
+                    String nomeArquivo = teclado.nextLine();
+
                     try{
-                        grafo.carregar(nomeArquivo); //verificar se o arq ja existe antes - método sendo ajustado
+                        grafo.carregar(nomeArquivo); //precisa acessar o método carregar que tá dentro de grafoMutavel
                     }catch(FileNotFoundException e){
-                        System.out.println("Arquivo não existente, você deve primeiro salvar o grafo" + e);
+                        System.out.println("Arquivo não existente, você deve primeiro gerar e salvar o grafo" + e);
                     }
                     break;
                 case 2:
