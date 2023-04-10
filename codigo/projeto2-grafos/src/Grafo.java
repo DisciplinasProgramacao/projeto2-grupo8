@@ -1,5 +1,6 @@
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +37,7 @@ public class Grafo {
 
     private final String nome;
     protected ABB<Vertice> vertices;
-    
+
     /*
      * Cria e retorna o grafo completo de acordo com a ordem recebida. Caso a ordem
      * seja menor ou igual a zero ignora e exibe um warning
@@ -99,7 +100,7 @@ public class Grafo {
 
         for (int i = 1; i <= ordem; i++) {
             for (int j = i + 1; j <= ordem; j++) {
-                if (this.existeAresta(i, j) == null) {             
+                if (this.existeAresta(i, j) == null) {
                     return false;
                 }
             }
@@ -114,7 +115,7 @@ public class Grafo {
      */
 
     public Grafo subGrafo(Lista<Integer> vertices) {
-        //Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
+        // Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
         GrafoMutavel subGrafoMutavel = new GrafoMutavel("Subgrafo de" + this.nome);
         Integer vetor[] = new Integer[vertices.size()];
         vetor = vertices.allElements(vetor);
@@ -124,7 +125,8 @@ public class Grafo {
         }
         for (int i = 0; i < vetor.length; i++) {
             for (int x = 0; x < vetor.length; x++) {
-                if ((this.existeAresta(vetor[i], vetor[x]) != null) && (subGrafoMutavel.existeVertice(vetor[x]) != null)) {
+                if ((this.existeAresta(vetor[i], vetor[x]) != null)
+                        && (subGrafoMutavel.existeVertice(vetor[x]) != null)) {
                     subGrafoMutavel.addAresta(vetor[i], vetor[x], 0); // Se sim, adiciona essa aresta no subgrafo
                 }
             }
@@ -138,7 +140,7 @@ public class Grafo {
 
         for (int i = 1; i <= vertices; i++) {
             for (int j = i + 1; j <= vertices; j++) {
-                if (this.existeAresta(i, j) != null) {             
+                if (this.existeAresta(i, j) != null) {
                     arestas++;
                 }
             }
@@ -150,16 +152,38 @@ public class Grafo {
         return this.vertices.size();
     }
 
-    public Grafo bfs(int idVerticeInicio){
-        return null;
+    public Grafo bfs(int idVerticeInicio) {
+        GrafoMutavel grafoRetorno = new GrafoMutavel(this.nome + " BFS");
+        Queue<Vertice> queue = new LinkedList<>();
+
+        queue.add(this.vertices.find(idVerticeInicio));
+        this.vertices.find(idVerticeInicio).visitar();
+        grafoRetorno.addVertice(idVerticeInicio);
+
+        while (!queue.isEmpty()) {
+            Lista<Integer> vizinhosList = queue.remove().vizinhos();
+            for (int i = 0; i < vizinhosList.size(); i++) {
+                if (!vertices.find(i).visitado()) {
+                    vertices.find(i).visitar();
+                    queue.add(vertices.find(i));
+                    grafoRetorno.addVertice(i);
+                    grafoRetorno.addAresta(vertices.find(i).getId(), i, 0);
+                }
+            }
+        }
+
+        for (int i = 0; i < vertices.size(); i++) {
+            vertices.find(i).limparVisita();
+        }
+        return grafoRetorno;
     }
 
-    public Grafo dfs(int idVerticeInicio){
+    public Grafo dfs(int idVerticeInicio) {
         boolean[] visited = new boolean[idVerticeInicio];
         GrafoMutavel result = new GrafoMutavel("DFS");
         LinkedList<Integer>[] adj = new LinkedList[idVerticeInicio];
         Stack<Integer> stack = new Stack<Integer>();
-        
+
         stack.push(idVerticeInicio);
 
         while (!stack.isEmpty()) {

@@ -25,6 +25,7 @@ public class App {
         System.out.println("5 - Gerar Grafo Completo");
         System.out.println("6 - Gerar Subgrafo ");
         System.out.println("7 - Fazer pesquisa DFS");
+        System.out.println("8 - Fazer pesquisa DFS");
         System.out.println("0 - Sair");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
@@ -48,22 +49,22 @@ public class App {
                 case 1:
                     System.out.println("Nome do arquivo a ser carregado: ");
                     nomeArquivo = teclado.nextLine();
-                    
-                    try{
+
+                    try {
                         grafoMutavel.carregar(nomeArquivo);
-                    }catch(FileNotFoundException e){
+                    } catch (FileNotFoundException e) {
                         System.out.println("Arquivo não existente, você deve primeiro gerar e salvar o grafo " + e);
                     }
                     break;
                 case 2:
                     System.out.println("Nome do arquivo: ");
                     nomeArquivo = teclado.nextLine();
-                    try{                        
+                    try {
                         grafoMutavel.salvar(nomeArquivo);
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         System.out.println("Não existe grafo para ser salvo, você deve primeiro gerar o grafo " + e);
                     }
-                    
+
                     break;
                 case 3:
 
@@ -78,12 +79,18 @@ public class App {
                     break;
                 case 6:
                     Grafo subGrafo = gerarSubGrafo(grafo);
-                    //subGrafo.salvar("subgrafo");
+                    // subGrafo.salvar("subgrafo");
                     System.out.println("Arquivo de subgrafo criado");
                     break;
-                case 7: 
+                case 7:
                     System.out.println("Retorno da pesquisa");
-                    grafo.bfs(2);
+                    grafo.dfs(2);
+                    break;
+                case 8:
+                    System.out.println("\nDigite o vertice: ");
+                    String verticeEntradaTeclado = teclado.nextLine();
+                    System.out.println("Retorno da pesquisa bfs");
+                    grafo.bfs(Integer.parseInt(verticeEntradaTeclado));
                     break;
             }
             pausa();
@@ -91,17 +98,17 @@ public class App {
         System.out.println("Saindo...");
     }
 
-    private static Grafo gerarSubGrafo(Grafo grafo){
+    private static Grafo gerarSubGrafo(Grafo grafo) {
         Lista<Integer> verticesSubGrafo = new Lista<>();
         int opcao, vertice;
-        do{
+        do {
             System.out.println("Vértice que deseja para gerar o subgrafo: ");
             vertice = Integer.parseInt(teclado.nextLine());
             verticesSubGrafo.add(vertice);
-            
+
             System.out.println("Digite um número para continuar a selecionar vértices ou 0 para sair: ");
             opcao = Integer.parseInt(teclado.nextLine());
-        }while(opcao != 0);
+        } while (opcao != 0);
 
         return grafo.subGrafo(verticesSubGrafo);
     }
