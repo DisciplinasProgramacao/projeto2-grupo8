@@ -27,7 +27,11 @@ public class GrafoTest {
     public void deveRetornarNuloCasoTenteGerarGrafoComOrdemMenorOuIgualAZero(){        
         assertNull(Grafo.grafoCompleto(-4));
     }
-
+    @Test
+    public void deveCriarumGrafoCompletoDaClasse(){        
+        GrafoCompleto grafoT = new GrafoCompleto(4);
+        grafoT.completo();
+    }
     @Test
     public void deveRetornarTrueCasoGrafoCompletoSejaGeradoComSucesso(){
         grafo = Grafo.grafoCompleto(6);
@@ -133,6 +137,7 @@ public class GrafoTest {
         meuGrafo.addVertice(1);
         meuGrafo.addVertice(2);
         meuGrafo.addVertice(3);
+        meuGrafo.addVertice(4);
         meuGrafo.addAresta(1, 2, 0);
         meuGrafo.addAresta(1, 4, 0);
         meuGrafo.addAresta(2, 3, 0);
