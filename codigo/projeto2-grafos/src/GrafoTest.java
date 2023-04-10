@@ -145,7 +145,6 @@ public class GrafoTest {
     
         meuGrafo = (GrafoMutavel) meuGrafo.subGrafo(minhaLista);
 
-        //TO DO olhar isso
         assertNotNull(meuGrafo.existeVertice(1));
         assertNotNull(meuGrafo.existeVertice(2));
         assertNotNull(meuGrafo.existeVertice(3));
@@ -163,6 +162,21 @@ public class GrafoTest {
         meuGrafo.addAresta(1,3, 0);
 
         assertEquals(5, meuGrafo.tamanho());
+    }
+    @Test
+    public void retornaGraudoVertice3(){
+        meuGrafo.addVertice(1);
+        meuGrafo.addVertice(2);
+        meuGrafo.addVertice(3);
+        meuGrafo.addVertice(4);
+
+        meuGrafo.addAresta(1, 2, 0);
+        meuGrafo.addAresta(1, 3, 0);
+        meuGrafo.addAresta(1, 4, 0);
+
+        assertEquals(3, meuGrafo.existeVertice(1).grau());
+
+
     }
 
 }
