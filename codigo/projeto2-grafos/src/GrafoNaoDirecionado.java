@@ -14,7 +14,16 @@ public class GrafoNaoDirecionado extends GrafoMutavel{
         return adicionou;
     }
 
+     
     public Aresta removeAresta(int origem, int destino) {
-        return null;
+        Vertice verticeO = vertices.find(origem);
+        Aresta arestaR = this.existeAresta(origem, destino);
+
+        if (arestaR == null) {
+            System.out.println("A aresta não existe no grafo.");
+            return null;
+        }else{
+           return verticeO.removeAresta(destino);
+        }
     }
 }
