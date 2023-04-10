@@ -45,14 +45,14 @@ public class App {
             switch (opcao) {
                 case 1:
                     try{
-                        grafo.carregar(nomeArquivo); //verificar se o arq ja existe
+                        grafo.carregar(nomeArquivo); //verificar se o arq ja existe antes - método sendo ajustado
                     }catch(FileNotFoundException e){
                         System.out.println("Arquivo não existente, você deve primeiro salvar o grafo" + e);
                     }
                     break;
                 case 2:
                     //montarGrafo(grafo);
-                    grafo.salvar(nomeArquivo);
+                    //grafo.salvar(nomeArquivo);
                     break;
                 case 3:
 
@@ -67,46 +67,13 @@ public class App {
                     break;
                 case 6:
                     Grafo subGrafo = gerarSubGrafo(grafo); //Verificar como preencher o arquivo nesse caso
-                    subGrafo.salvar("subgrafo");
+                    //subGrafo.salvar("subgrafo");
                     System.out.println("Arquivo de subgrafo criado"); //Posteriormente verificar a criação de um método para imprimir o arq
                     break;
             }
             pausa();
         } while (opcao != 0);
         System.out.println("Saindo...");
-    }
-
-    private static void montarGrafo(Grafo grafo){
-        System.out.println("Tamanho do grafo: ");
-        int tamanho = Integer.parseInt(teclado.nextLine());
-        int opcao;
-
-        for(int i = 1; i <= tamanho; i++){
-            grafo.addVertice(i);
-        }
-
-        do{
-            System.out.println("Arestas (Formato: 1 2 3 [origem destino peso]): ");
-            String arestas = teclado.nextLine();
-
-            while(arestas.split(" ").length != 3){
-                System.out.println("Formato de aresta inválido, digite novamente: ");
-                System.out.println("Arestas (Formato: 1 2 3 [origem destino peso]): ");
-                arestas = teclado.nextLine();
-            }
-
-            String[] dadosAresta = arestas.split(" ");
-            int origem = Integer.parseInt(dadosAresta[0]);
-            int destino = Integer.parseInt(dadosAresta[1]);
-            int peso = Integer.parseInt(dadosAresta[2]);
-
-            grafo.addAresta(origem, destino, peso);
-
-            limparTela();
-            System.out.println("Digite um número para continuar a adicionar arestas ou 0 para sair: ");
-            opcao = Integer.parseInt(teclado.nextLine());
-
-        }while(opcao != 0);
     }
 
     private static Grafo gerarSubGrafo(Grafo grafo){
