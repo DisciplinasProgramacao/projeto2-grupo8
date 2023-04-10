@@ -106,8 +106,15 @@ public class Vertice {
         return this.visitado;
     }
 
-    //TO DO implementar método
-    public Lista<Integer> vizinhos(){
-        return null;
+    // TO DO implementar método
+    public Lista<Integer> vizinhos() {
+        Lista<Integer> vizinhosList = new Lista<Integer>;
+
+        if (arestas.size() != 0) {
+            for (int i = 0; i < arestas.size(); i++) {
+                vizinhosList.add(arestas.find(i).destino());
+            }
+        }
+        return vizinhosList;
     }
 }
