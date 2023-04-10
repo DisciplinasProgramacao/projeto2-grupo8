@@ -30,7 +30,7 @@ public class GrafoTest {
     @Test
     public void deveCriarumGrafoCompletoDaClasse(){        
         GrafoCompleto grafoT = new GrafoCompleto(4);
-        grafoT.completo();
+        assertTrue(grafoT.completo());
     }
     @Test
     public void deveRetornarTrueCasoGrafoCompletoSejaGeradoComSucesso(){
