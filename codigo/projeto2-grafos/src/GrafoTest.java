@@ -50,8 +50,7 @@ public class GrafoTest {
     }
 
     @Test
-    public void retornaOrdem(){
-
+    public void deveRetornarOrdemCorreta(){
         meuGrafo.addVertice(1);
         meuGrafo.addVertice(2);
 
@@ -59,32 +58,36 @@ public class GrafoTest {
     }
 
     @Test
-    public void deveRetornarFalseCasoExistaAresta(){
+    public void deveRetornarFalsoCasoTenteAdicionarArestaQueJaExista(){
+        meuGrafo.addVertice(4);
+        meuGrafo.addVertice(5);
         meuGrafo.addAresta(4,5,1);
+
+        assertFalse(meuGrafo.addAresta(4,5,5));
+    }
+
+    @Test
+    public void deveRetornarFalsoCasoTenteAdicionarArestaEmUmVerticeInexistente(){
+        meuGrafo.addVertice(5);
         assertFalse(meuGrafo.addAresta(4,5,5));
     }
 
    @Test
-    public void deveRetornarTrueCasoNaoExistaAresta(){
+    public void deveRetornarTrueCasoTenteAdicionarNovaAresta(){
         meuGrafo.addVertice(2);
         meuGrafo.addVertice(3);
         assertTrue(meuGrafo.addAresta(2,3,1));
     }
 
     @Test
-    public void deveRetornarFalsoCasoExistaVertice(){
+    public void deveRetornarFalsoCasoTenteAdicionarVerticeComMesmoId(){
         meuGrafo.addVertice(1);
         assertFalse(meuGrafo.addVertice(1));
     }
 
-    @Test
-    public void deveRetornarVerdadeiroCasoNaoExistaVertice(){
-        assertTrue(meuGrafo.addVertice(900));
-    }
-
     @Test 
-    public void deveAdicionarUmVerticeComIdUm() {        
-        assertTrue(meuGrafo.addVertice(1));
+    public void deveAdicionarUmVerticeComIdUnico() {        
+        assertTrue(meuGrafo.addVertice(9));
     }
 
     @Test
