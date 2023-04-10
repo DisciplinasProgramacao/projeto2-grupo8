@@ -63,9 +63,7 @@ public class GrafoMutavel extends Grafo {
             System.out.println("A aresta não existe no grafo.");
             return null;
         }else{
-
            return verticeO.removeAresta(destino);
-            
         }
     }
  
@@ -99,7 +97,6 @@ public class GrafoMutavel extends Grafo {
             this.addAresta(origem, destino, peso);
         }
         entrada.close();
-
     }
 
     /**
