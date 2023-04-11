@@ -46,6 +46,7 @@ public class GrafoDirecionadoTest {
          meuGrafo.addAresta(1, 2, 5);
  
          assertEquals(5, meuGrafo.existeAresta(1, 2).peso());
-         assertNull(meuGrafo.existeAresta(2, 1).peso());
+         assertNull(meuGrafo.existeAresta(2, 1));
+         assertNotNull(meuGrafo.existeAresta(1, 2));
      }
 }
