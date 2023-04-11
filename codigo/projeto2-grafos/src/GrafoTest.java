@@ -194,8 +194,18 @@ public class GrafoTest {
         meuGrafo.addAresta(1, 4, 0);
 
         assertEquals(3, meuGrafo.existeVertice(1).grau());
+    public void buscaBFS() {
+        GrafoMutavel grafoB = new GrafoMutavel("grafob");
+        GrafoMutavel grafoF = new GrafoMutavel("grafof");
 
+        grafoB.addVertice(1);
+        grafoB.addVertice(2);
+        grafoB.addVertice(3);
 
-    } 
-    
+        grafoB.addAresta(1, 2, 0);
+        grafoB.addAresta(2, 3, 0);
+        grafoB.addAresta(3, 1, 0);
+        grafoF = grafoB.bfs(1);
+        assertNotNull(grafoF.existeAresta(1, 2));
+    }
 }
