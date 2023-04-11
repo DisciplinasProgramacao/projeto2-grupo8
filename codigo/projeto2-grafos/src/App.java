@@ -70,29 +70,27 @@ public class App {
                 
                     case 3:
                     System.out.println("Grafo COM aresta ponderada\n");
-                    System.out.println("Digite a origem: ");
-                    int origemAP = Integer.parseInt(teclado.nextLine());
-
-                    System.out.println("Digite o destino: ");
-                    int destinoAP = Integer.parseInt(teclado.nextLine());
-                    
-                    System.out.println("Digite o peso da aresta: ");
-                    int peso = Integer.parseInt(teclado.nextLine());
-
-                    grafoMutavel.addAresta(origemAP, destinoAP, peso);
+                    grafoMutavel.addVertice(1);
+                    grafoMutavel.addVertice(2);
+                    grafoMutavel.addVertice(3);
+                    grafoMutavel.addVertice(4);
+                    grafoMutavel.addVertice(5);
+                    grafoMutavel.addVertice(6);
+                    grafoMutavel.addAresta(1, 2, 3);
+                    grafoMutavel.addAresta(4, 5, 6);
                     System.out.println(grafoMutavel.toString());
 
                     break;
 
                 case 4:
-                    System.out.println("Grafo SEM aresta ponderada\n");
-                    System.out.println("Digite a origem: ");
-                    int origem = Integer.parseInt(teclado.nextLine());
-
-                    System.out.println("Digite o destino: ");
-                    int destino = Integer.parseInt(teclado.nextLine());
-                    
-                    grafoMutavel.addAresta(origem, destino, 0);
+                    grafoMutavel.addVertice(7);
+                    grafoMutavel.addVertice(8);
+                    grafoMutavel.addVertice(9);
+                    grafoMutavel.addVertice(10);
+                    grafoMutavel.addVertice(11);
+                    grafoMutavel.addVertice(12);
+                    grafoMutavel.addAresta(7, 8, 0);
+                    grafoMutavel.addAresta(10, 11, 0);
                     System.out.println(grafoMutavel.toString());
                     break;
 
@@ -130,7 +128,7 @@ public class App {
                     System.out.println("Retorno da pesquisa");
                     grafo.dfs(2);
                     break;
-                    
+
                 case 8:
                     System.out.println("\nDigite o vertice: ");
                     String verticeEntradaTeclado = teclado.nextLine();
