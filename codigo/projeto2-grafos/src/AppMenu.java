@@ -69,7 +69,7 @@ public class AppMenu {
                     break;
 
                 case 3:
-                    System.out.println("Grafo com aresta ponderada\n");
+                    System.out.println("Grafo COM aresta ponderada\n");
                     System.out.println("Digite a origem: ");
                     int origemAP = Integer.parseInt(teclado.nextLine());
 
@@ -83,7 +83,7 @@ public class AppMenu {
                     break;
 
                 case 4:
-                    System.out.println("Grafo sem aresta ponderada\n");
+                    System.out.println("Grafo SEM aresta ponderada\n");
                     System.out.println("Digite a origem: ");
                     int origem = Integer.parseInt(teclado.nextLine());
 
@@ -128,7 +128,7 @@ public class AppMenu {
                     System.out.println("Retorno da pesquisa");
                     grafo.dfs(2);
                     break;
-                    
+
                 case 8:
                     System.out.println("\nDigite o vertice: ");
                     String verticeEntradaTeclado = teclado.nextLine();
