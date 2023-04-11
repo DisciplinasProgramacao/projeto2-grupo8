@@ -1,6 +1,6 @@
 public class GrafoCompleto extends Grafo {
     public GrafoCompleto(int ordem){
-        super("Grafo completo de ordem" + ordem);
+        super("Grafo completo de ordem " + ordem);
 
         for (int i = 1; i <= ordem; i++) {
             Vertice vertice = new Vertice(i);
