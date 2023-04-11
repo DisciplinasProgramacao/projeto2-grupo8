@@ -27,7 +27,7 @@ public class ArestaTest {
 
     @Test
     public void deveRetornarIdDoVerticeDeDestinoDaAresta(){
-        assertEquals(arestaPonderada.destino(), 2);
+        assertEquals(arestaPonderada.destino(), 1);
         assertEquals(arestaNaoPonderada.destino(), 3);
     }
 

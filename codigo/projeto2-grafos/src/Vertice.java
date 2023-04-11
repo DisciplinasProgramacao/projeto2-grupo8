@@ -49,6 +49,10 @@ public class Vertice {
         return this.id;
     }
 
+    /**
+     * @param destino Vértice de destino
+     * @return TRUE se aresta foi inserida, FALSE caso já existisse e não foi inserida
+     */
     public boolean addAresta(int destino) {
         return this.arestas.add(destino, new Aresta(destino));
     }
@@ -57,13 +61,19 @@ public class Vertice {
      * Adiciona uma aresta ponderada neste vértice para um destino
      * 
      * @param peso Peso da aresta
-     * @param dest Vértice de destino
+     * @param destino Vértice de destino
      * @return TRUE se foi inserida, FALSE caso já existisse e não foi inserida.
      */
     public boolean addAresta(int destino, int peso) {
         return this.arestas.add(destino, new Aresta(peso, destino));
     }
 
+    /**
+     * Valida se a aresta existe no grafo ou não
+     * 
+     * @param destino Vértice de destino
+     * @return Aresta encontrada ou null caso não exista
+     */
     public Aresta existeAresta(int destino) {
         return this.arestas.find(destino);
     }
@@ -79,6 +89,11 @@ public class Vertice {
         return this.arestas.remove(destino);
     }
 
+    /**
+     * Retorna o grau do vértice
+     * 
+     * @return Grau do vértice (número de arestas incidentes)
+     */
     public int grau() {
         return this.arestas.size();
     }
@@ -106,7 +121,11 @@ public class Vertice {
         return this.visitado;
     }
 
-    // TO DO implementar método
+    /**
+     * Retorna todos os vizinhos de um vertice
+     * 
+     * @return Lista com o par de todos os vértices vizinhos
+     */
     public Lista<Integer> vizinhos() {
         Lista<Integer> vizinhosList = new Lista<Integer>();
 
