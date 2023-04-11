@@ -76,11 +76,29 @@ public class App {
                     System.out.println("Ordem do grafo: ");
                     int ordem = Integer.parseInt(teclado.nextLine());
                     grafo = Grafo.grafoCompleto(ordem);
+                    System.out.println(grafo.toString());
                     break;
                 case 6:
-                    Grafo subGrafo = gerarSubGrafo(grafo);
-                    // subGrafo.salvar("subgrafo");
-                    System.out.println("Arquivo de subgrafo criado");
+                    grafoMutavel.addVertice(1);
+                    grafoMutavel.addVertice(2);
+                    grafoMutavel.addVertice(3);
+                    grafoMutavel.addVertice(4);
+                    grafoMutavel.addVertice(5);
+
+                    grafoMutavel.addAresta(1, 2, 0);
+                    grafoMutavel.addAresta(1, 3, 0);
+                    grafoMutavel.addAresta(1, 4, 0);
+                    grafoMutavel.addAresta(1, 5, 0);
+                    grafoMutavel.addAresta(2, 3, 0);
+                    grafoMutavel.addAresta(2, 4, 0);
+                    grafoMutavel.addAresta(2, 5, 0);
+                    grafoMutavel.addAresta(3, 4, 0);
+                    grafoMutavel.addAresta(3, 5, 0);
+                    grafoMutavel.addAresta(4, 5, 0);
+
+                    grafoMutavel.salvar("GrafoMutavel");
+
+                    gerarSubGrafo(grafoMutavel);
                     break;
                 case 7:
                     System.out.println("Retorno da pesquisa");
@@ -98,7 +116,7 @@ public class App {
         System.out.println("Saindo...");
     }
 
-    private static Grafo gerarSubGrafo(Grafo grafo) {
+    private static void gerarSubGrafo(GrafoMutavel grafo) {
         Lista<Integer> verticesSubGrafo = new Lista<>();
         int opcao, vertice;
         do {
@@ -110,6 +128,6 @@ public class App {
             opcao = Integer.parseInt(teclado.nextLine());
         } while (opcao != 0);
 
-        return grafo.subGrafo(verticesSubGrafo);
+        System.out.println(grafo.subGrafo(verticesSubGrafo).toString());
     }
 }
