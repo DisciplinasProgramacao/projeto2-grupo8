@@ -3,8 +3,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
 
 public class GrafoDirecionadoTest {
@@ -46,6 +44,7 @@ public class GrafoDirecionadoTest {
          meuGrafo.addAresta(1, 2, 5);
  
          assertEquals(5, meuGrafo.existeAresta(1, 2).peso());
-         assertNull(meuGrafo.existeAresta(2, 1).peso());
+         assertNull(meuGrafo.existeAresta(2, 1));
+         assertNotNull(meuGrafo.existeAresta(1, 2));
      }
 }

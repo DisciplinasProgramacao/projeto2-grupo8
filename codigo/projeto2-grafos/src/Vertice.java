@@ -138,14 +138,6 @@ public class Vertice {
     public Lista<Integer> vizinhos() {
         Lista<Integer> vizinhosList = new Lista<Integer>();
 
-        /*
-         * if (arestas.size() != 0) {
-         * for (int i = 0; i < arestas.size(); i++) {
-         * vizinhosList.add(arestas.find(i).destino());
-         * }
-         * }
-         */
-
         if (arestas.size() != 0) {
             Aresta[] arestas;
             arestas = new Aresta[this.arestas.size()];

@@ -190,29 +190,29 @@ public class Grafo {
         this.vertices.find(idVerticeInicio).visitar();
 
         // se cria uma lista de vizinhos do vertice inicial
-        Lista<Integer> vizinhosList = vertices.find(idVerticeInicio).vizinhos();
-        for (int i = 0; i <= vizinhosList.size();) { // percorre essa lista de vizinhos
-            search_dfs(vertices.find(i), grafoRetorno, i); // entra no metodo e faz ele percorrer cada vizinho do vizinho
-            grafoRetorno.addAresta(vertices.find(idVerticeInicio).getId(), i, 0); // adiciona as arestas  do vertice original para seus vizinhos
+        Lista<Integer> vizinhosList = this.vertices.find(idVerticeInicio).vizinhos();
+        for (int i = 1; i <= vizinhosList.size();) { // percorre essa lista de vizinhos
+            search_dfs(this.vertices.find(i), grafoRetorno, i); // entra no metodo e faz ele percorrer cada vizinho do vizinho
+            grafoRetorno.addAresta(this.vertices.find(idVerticeInicio).getId(), i, 0); // adiciona as arestas  do vertice original para seus vizinhos
             vizinhosList.remove(i); // remove da lista o vizinho já percorrido
         }        
         this.vertices.find(idVerticeInicio).visitar(); // mostra que o vertice foi visitado já
         grafoRetorno.addVertice(idVerticeInicio); // adiciona o vertice original
 
-        for (int i = 0; i < vertices.size(); i++) {
-            vertices.find(i).limparVisita();
+        for (int i = 1; i < this.vertices.size(); i++) {
+            this.vertices.find(i).limparVisita();
         }
         return grafoRetorno;
     }
 
     public void search_dfs(Vertice vertice, GrafoMutavel grafoRetorno, int i) {
-        if (!vertices.find(i).visitado()) { // se não foi visitado ele entra
-            vertices.find(i).visitar(); // adiciona que foi visitado
-            Lista<Integer> vizinhosList = vertices.find(i).vizinhos(); // preenche uma list com os seus vizinhos
+        if (!vertice.visitado()) { // se não foi visitado ele entra
+            vertice.visitar(); // adiciona que foi visitado
+            Lista<Integer> vizinhosList = vertice.vizinhos(); // preenche uma list com os seus vizinhos
             for (int x = 0; x <= vizinhosList.size();) { // percorre essa lista de vizinhos 
                 search_dfs(vertices.find(x), grafoRetorno, x); // entra no metodo e faz ele percorrer cada vizinho do vizinho
                 vizinhosList.remove(x);  // remove da lista o vizinho já percorrido
-                grafoRetorno.addAresta(vertices.find(i).getId(), x, 0);// adiciona as arestas  do vertice original para seus vizinhos
+                grafoRetorno.addAresta(vertice.getId(), x, 0);// adiciona as arestas  do vertice original para seus vizinhos
             }
         }
         grafoRetorno.addVertice(i);

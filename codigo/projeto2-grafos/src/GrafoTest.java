@@ -174,7 +174,7 @@ public class GrafoTest {
     }
 
     @Test
-    public void buscaDFS() {
+    public void deveRealizarBuscaEmProfundidade() {
         GrafoMutavel grafoB = new GrafoMutavel("4");
         GrafoMutavel grafoF = new GrafoMutavel("4");
 
@@ -205,7 +205,7 @@ public class GrafoTest {
     }
 
     @Test
-    public void buscaBFS() {
+    public void deveRealizarBuscaEmLargura() {
         GrafoMutavel grafoB = new GrafoMutavel("grafob");
         GrafoMutavel grafoF = new GrafoMutavel("grafof");
 
