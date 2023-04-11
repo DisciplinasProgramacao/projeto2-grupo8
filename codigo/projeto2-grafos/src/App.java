@@ -25,7 +25,7 @@ public class App {
         System.out.println("5 - Gerar Grafo Completo");
         System.out.println("6 - Gerar Subgrafo ");
         System.out.println("7 - Fazer pesquisa DFS");
-        System.out.println("8 - Fazer pesquisa DFS");
+        System.out.println("8 - Fazer pesquisa BFS");
         System.out.println("0 - Sair");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
@@ -36,7 +36,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         limparTela();
 
-        String nomeArquivo;
+        String verticeEntradaTeclado, nomeArquivo;
         Grafo grafo = new Grafo("");
         GrafoMutavel grafoMutavel = new GrafoMutavel("");
 
@@ -127,13 +127,16 @@ public class App {
                     break;
 
                 case 7:
-                    System.out.println("Retorno da pesquisa");
+                    verticeEntradaTeclado = "";
+                    System.out.println("\nDigite o vertice: ");
+                    verticeEntradaTeclado = teclado.nextLine();
+                    System.out.println("Retorno da pesquisa bfs");
                     grafo.dfs(2);
                     break;
                     
                 case 8:
                     System.out.println("\nDigite o vertice: ");
-                    String verticeEntradaTeclado = teclado.nextLine();
+                    verticeEntradaTeclado = teclado.nextLine();
                     System.out.println("Retorno da pesquisa bfs");
                     grafo.bfs(Integer.parseInt(verticeEntradaTeclado));
                     break;
