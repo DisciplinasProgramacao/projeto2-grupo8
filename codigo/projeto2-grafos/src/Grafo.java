@@ -160,7 +160,7 @@ public class Grafo {
         LinkedList<Integer>[] adj = new LinkedList[idVerticeInicio];
         Stack<Integer> stack = new Stack<Integer>();
         
-        stack.push(idVerticeInicio);
+        stack.push(idVerticeInicio); 
 
         while (!stack.isEmpty()) {
             int current = stack.pop();
