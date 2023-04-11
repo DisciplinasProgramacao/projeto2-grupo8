@@ -7,26 +7,27 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 
-public class GrafoDirecionadoTest {
-
-    GrafoDirecionado meuGrafo;
+public class GrafoNaoDirecionadoTest {
+    
+    GrafoNaoDirecionado meuGrafo = new GrafoNaoDirecionado("null");    
 
     @BeforeEach
     public void prepare(){
-        meuGrafo = new GrafoDirecionado("");
+
+        meuGrafo = new GrafoNaoDirecionado("");
     }
     @Test
-    public void adicionaArestaDirecionada(){
+    public void adicionaArestaNaoDirecionada(){
         meuGrafo.addVertice(1);
         meuGrafo.addVertice(2);
         meuGrafo.addVertice(3);
         meuGrafo.addAresta(1, 2, 0);
 
         assertNotNull(meuGrafo.existeAresta(1, 2));
-        assertNull(meuGrafo.existeAresta(2, 1));
+        assertNotNull(meuGrafo.existeAresta(2, 1));
     }
     @Test
-    public void removeArestaDirecionada(){
+    public void removeArestaNaoDirecionada(){
         meuGrafo.addVertice(1);
         meuGrafo.addVertice(2);
         meuGrafo.addVertice(3);
@@ -38,14 +39,14 @@ public class GrafoDirecionadoTest {
         assertNotNull(meuGrafo.existeAresta(1, 3));
         
     }
-     @Test
-     public void adicionaArestaDirecionadaPonderada(){
-         meuGrafo.addVertice(1);
-         meuGrafo.addVertice(2);
-         meuGrafo.addVertice(3);
-         meuGrafo.addAresta(1, 2, 5);
- 
-         assertEquals(5, meuGrafo.existeAresta(1, 2).peso());
-         assertNull(meuGrafo.existeAresta(2, 1).peso());
-     }
+    @Test
+    public void adicionaArestaNaoDirecionadaPonderada(){
+        meuGrafo.addVertice(1);
+        meuGrafo.addVertice(2);
+        meuGrafo.addVertice(3);
+        meuGrafo.addAresta(1, 2, 5);
+
+        assertEquals(5, meuGrafo.existeAresta(1, 2).peso());
+        assertEquals(5, meuGrafo.existeAresta(2, 1).peso());
+    }
 }
