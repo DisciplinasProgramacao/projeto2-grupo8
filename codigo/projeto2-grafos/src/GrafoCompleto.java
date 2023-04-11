@@ -8,7 +8,7 @@ public class GrafoCompleto extends Grafo {
         }
 
         for (int origem = 1; origem <= ordem; origem++) {
-            for (int destino = origem + 1; destino <= ordem + 1; destino++) {
+            for (int destino = origem + 1; destino <= ordem; destino++) {
                 vertices.find(origem).addAresta(destino);
             }
         }

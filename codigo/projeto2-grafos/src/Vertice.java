@@ -50,6 +50,15 @@ public class Vertice {
     }
 
     /**
+     * Retorna todas as arestas de um vértice
+     * 
+     * @return Árvore com todas as arestas
+     */
+    public ABB<Aresta> getAresta() {
+        return arestas;
+    }
+
+    /**
      * @param destino Vértice de destino
      * @return TRUE se aresta foi inserida, FALSE caso já existisse e não foi inserida
      */
