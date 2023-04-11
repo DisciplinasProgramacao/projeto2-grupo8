@@ -67,10 +67,12 @@ public class AppMenu {
 
                     break;
                 case 3:
-
+                    System.out.println("Grafo com aresta ponderada\n");
+                    grafoMutavel.addAresta(origem, destino, pedo);
                     break;
                 case 4:
-
+                System.out.println("Grafo sem aresta ponderada\n");
+                grafoMutavel.addAresta(origem, destino, 0);
                     break;
                 case 5:
                     System.out.println("Ordem do grafo: ");
