@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -152,7 +153,7 @@ public class Grafo {
         return this.vertices.size();
     }
 
-    public Grafo bfs(int idVerticeInicio) {
+    public GrafoMutavel bfs(int idVerticeInicio) {
         GrafoMutavel grafoRetorno = new GrafoMutavel(this.nome + " BFS");
         Queue<Vertice> queue = new LinkedList<>();
 
@@ -162,19 +163,27 @@ public class Grafo {
 
         while (!queue.isEmpty()) {
             Lista<Integer> vizinhosList = queue.remove().vizinhos();
+            Integer[] vizinhosListArray = new Integer[vizinhosList.size()];
+            vizinhosListArray = vizinhosList.allElements(vizinhosListArray);
+            // System.out.println(vizinhosListArray[0] + " " + vizinhosListArray[1]);
             for (int i = 0; i < vizinhosList.size(); i++) {
-                if (!vertices.find(i).visitado()) {
-                    vertices.find(i).visitar();
-                    queue.add(vertices.find(i));
-                    grafoRetorno.addVertice(i);
-                    grafoRetorno.addAresta(vertices.find(i).getId(), i, 0);
+                if (!vertices.find(vizinhosListArray[i]).visitado()) {
+                    // System.out.println("pass" + i);
+                    vertices.find(vizinhosListArray[i]).visitar();
+                    queue.add(vertices.find(vizinhosListArray[i]));
+                    grafoRetorno.addVertice(vizinhosListArray[i]);
+                    // System.out.println(vizinhosListArray[i] + " - " +
+                    // vertices.find(vizinhosListArray[i]).getId());
+                    grafoRetorno.addAresta(vertices.find(vizinhosListArray[i]).getId(), idVerticeInicio, 0);
                 }
             }
+            idVerticeInicio = vizinhosListArray[0];
         }
-
-        for (int i = 0; i < vertices.size(); i++) {
-            vertices.find(i).limparVisita();
-        }
+        /*
+         * for (int i = 0; i < vertices.size(); i++) {
+         * vertices.find(i).limparVisita();
+         * }
+         */
         return grafoRetorno;
     }
 
@@ -218,10 +227,12 @@ public class Grafo {
 
         StringBuilder grafoString = new StringBuilder("Grafo: ");
 
-        for (int i = 1; i <= this.ordem(); i++) {
-            Vertice vertice = vertices.find(i);
-            if(vertice != null)
-                idVert.append(vertice.getId());
+        Vertice arrayVertice[] = new Vertice[vertices.size()];
+        vertices.allElements(arrayVertice);
+    
+        for (int i = 0; i < arrayVertice.length; i++) {
+            Vertice vertice = vertices.find(arrayVertice[i].getId());
+            idVert.append(vertice.getId());
             if (i < this.ordem())
                 idVert.append(",");
 

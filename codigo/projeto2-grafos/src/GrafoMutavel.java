@@ -110,10 +110,12 @@ public class GrafoMutavel extends Grafo {
         StringBuilder idVert = new StringBuilder();
         StringBuilder idArest = new StringBuilder();
 
-        for (int i = 1; i <= this.ordem(); i++) {
-            Vertice vertice = vertices.find(i);
-            if(vertice != null)
-                idVert.append(vertice.getId());
+        Vertice arrayVertice[] = new Vertice[vertices.size()];
+        vertices.allElements(arrayVertice);
+
+        for (int i = 1; i <= arrayVertice.length; i++) {
+            Vertice vertice = vertices.find(arrayVertice[i].getId());
+            idVert.append(vertice.getId());
             if (i < this.ordem())
                 idVert.append(",");
 
