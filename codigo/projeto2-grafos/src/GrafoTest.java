@@ -149,5 +149,19 @@ public class GrafoTest {
 
         assertEquals(5, meuGrafo.tamanho());
     }
+    @Test   
+    public void buscaDFS(){
+        GrafoMutavel grafoB = new GrafoMutavel("4");
+        GrafoMutavel grafoF = new GrafoMutavel("4");
 
+        grafoB.addVertice(1);
+        grafoB.addVertice(2);
+        grafoB.addVertice(3);
+
+        grafoB.addAresta(1, 2, 0);
+        grafoB.addAresta(2, 3, 0);
+        grafoF = (GrafoMutavel) grafoB.dfs(2);
+
+       assertNotNull(grafoF.existeAresta(1, 2)); 
+    }
 }
