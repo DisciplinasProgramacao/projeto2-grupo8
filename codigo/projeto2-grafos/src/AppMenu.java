@@ -78,7 +78,9 @@ public class AppMenu {
                     
                     System.out.println("Digite o peso da aresta: ");
                     int peso = Integer.parseInt(teclado.nextLine());
+
                     grafoMutavel.addAresta(origemAP, destinoAP, peso);
+                    System.out.println(grafoMutavel.toString());
 
                     break;
 
@@ -91,7 +93,7 @@ public class AppMenu {
                     int destino = Integer.parseInt(teclado.nextLine());
                     
                     grafoMutavel.addAresta(origem, destino, 0);
-                    System.out.println(grafo.toString());
+                    System.out.println(grafoMutavel.toString());
                     break;
 
                 case 5:
