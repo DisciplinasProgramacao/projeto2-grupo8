@@ -35,10 +35,8 @@ public class GrafoMutavel extends Grafo {
     }
 
     /**
-     * Adiciona uma aresta entre dois vértices do grafo, caso os dois vértices
-     * existam no grafo.
-     * Caso a aresta já exista, ou algum dos vértices não existir, o comando é
-     * ignorado e retorna FALSE.
+     * Adiciona uma aresta entre dois vértices do grafo, caso os dois vértices existam no grafo.
+     * Caso a aresta já exista, ou algum dos vértices não existir, o comando é ignorado e retorna FALSE.
      * 
      * @param origem  Vértice de origem
      * @param destino Vértice de destino

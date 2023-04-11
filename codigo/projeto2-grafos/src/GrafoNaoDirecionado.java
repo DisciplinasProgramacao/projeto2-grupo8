@@ -4,6 +4,7 @@ public class GrafoNaoDirecionado extends GrafoMutavel{
         super(nome);
     }
 
+    @Override
     public boolean addAresta(int origem, int destino, int peso) {
         boolean adicionou = false;
         Vertice saida = this.existeVertice(origem);
@@ -14,7 +15,7 @@ public class GrafoNaoDirecionado extends GrafoMutavel{
         return adicionou;
     }
 
-     
+    @Override
     public Aresta removeAresta(int origem, int destino) {
         Vertice verticeO = vertices.find(origem);
         Aresta arestaR = this.existeAresta(origem, destino);
