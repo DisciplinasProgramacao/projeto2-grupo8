@@ -224,10 +224,12 @@ public class Grafo {
 
         StringBuilder grafoString = new StringBuilder("Grafo: ");
 
-        for (int i = 1; i <= this.ordem(); i++) {
-            Vertice vertice = vertices.find(i);
-            if(vertice != null)
-                idVert.append(vertice.getId());
+        Vertice arrayVertice[] = new Vertice[vertices.size()];
+        vertices.allElements(arrayVertice);
+    
+        for (int i = 0; i < arrayVertice.length; i++) {
+            Vertice vertice = vertices.find(arrayVertice[i].getId());
+            idVert.append(vertice.getId());
             if (i < this.ordem())
                 idVert.append(",");
 
