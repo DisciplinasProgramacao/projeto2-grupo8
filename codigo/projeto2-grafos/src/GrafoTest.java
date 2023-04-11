@@ -174,7 +174,7 @@ public class GrafoTest {
     }
 
     @Test
-    public void buscaDFS() {
+    public void deveRealizarBuscaEmProfundidade() {
         GrafoMutavel grafoB = new GrafoMutavel("4");
         GrafoMutavel grafoF = new GrafoMutavel("4");
 
@@ -187,24 +187,6 @@ public class GrafoTest {
         grafoF = (GrafoMutavel) grafoB.dfs(2);
 
         assertNotNull(grafoF.existeAresta(1, 2));
-    }
-
-    @Test
-    public void busca2() {
-        GrafoMutavel grafoB = new GrafoMutavel("4");
-        GrafoMutavel grafoF = new GrafoMutavel("4");
-
-        grafoB.addVertice(1);
-        grafoB.addVertice(2);
-        grafoB.addVertice(3);
-
-        grafoB.addAresta(1, 2, 0);
-        grafoB.addAresta(2, 3, 0);
-        grafoF = (GrafoMutavel) grafoB.bfs(2);
-
-        assertNotNull(grafoF.existeAresta(1, 2));
-        assertNotNull(grafoF.existeAresta(2, 3));
-
     }
 
     @Test
@@ -223,7 +205,7 @@ public class GrafoTest {
     }
 
     @Test
-    public void buscaBFS() {
+    public void deveRealizarBuscaEmLargura() {
         GrafoMutavel grafoB = new GrafoMutavel("grafob");
         GrafoMutavel grafoF = new GrafoMutavel("grafof");
 
