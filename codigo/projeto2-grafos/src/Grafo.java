@@ -204,4 +204,39 @@ public class Grafo {
         return result;
     }
 
+    public String toString(){
+        StringBuilder idVert = new StringBuilder();
+        StringBuilder idArest = new StringBuilder();
+
+        StringBuilder grafoString = new StringBuilder("Grafo: ");
+
+        for (int i = 1; i <= this.ordem(); i++) {
+            Vertice vertice = vertices.find(i);
+            if(vertice != null)
+                idVert.append(vertice.getId());
+            if (i < this.ordem())
+                idVert.append(",");
+
+            for (int j = i + 1; j <= this.ordem(); j++) {
+                Aresta aresta = vertice.existeAresta(j);
+                if (aresta != null) {
+                    idArest.append(vertice.getId());
+                    idArest.append("-");
+                    idArest.append(aresta.destino());
+                    idArest.append("-");
+                    idArest.append(aresta.peso());
+                    idArest.append(",");
+                }
+            }
+        }
+
+        String idArestStr = idArest.toString();
+
+        grafoString.append("vertice;");
+        grafoString.append(idVert.toString() + ";");
+        grafoString.append("\naresta;");
+        grafoString.append(idArestStr.substring(0, idArestStr.length() - 1) + ";");
+        return grafoString.toString();
+    }
+
 }
