@@ -56,6 +56,7 @@ public class AppMenu {
                         System.out.println("Arquivo não existente, você deve primeiro gerar e salvar o grafo " + e);
                     }
                     break;
+
                 case 2:
                     System.out.println("Nome do arquivo: ");
                     nomeArquivo = teclado.nextLine();
@@ -66,20 +67,40 @@ public class AppMenu {
                     }
 
                     break;
+
                 case 3:
                     System.out.println("Grafo com aresta ponderada\n");
-                    grafoMutavel.addAresta(origem, destino, pedo);
+                    System.out.println("Digite a origem: ");
+                    int origemAP = Integer.parseInt(teclado.nextLine());
+
+                    System.out.println("Digite o destino: ");
+                    int destinoAP = Integer.parseInt(teclado.nextLine());
+                    
+                    System.out.println("Digite o peso da aresta: ");
+                    int peso = Integer.parseInt(teclado.nextLine());
+                    grafoMutavel.addAresta(origemAP, destinoAP, peso);
+
                     break;
+
                 case 4:
-                System.out.println("Grafo sem aresta ponderada\n");
-                grafoMutavel.addAresta(origem, destino, 0);
+                    System.out.println("Grafo sem aresta ponderada\n");
+                    System.out.println("Digite a origem: ");
+                    int origem = Integer.parseInt(teclado.nextLine());
+
+                    System.out.println("Digite o destino: ");
+                    int destino = Integer.parseInt(teclado.nextLine());
+                    
+                    grafoMutavel.addAresta(origem, destino, 0);
+                    System.out.println(grafo.toString());
                     break;
+
                 case 5:
                     System.out.println("Ordem do grafo: ");
                     int ordem = Integer.parseInt(teclado.nextLine());
                     grafo = Grafo.grafoCompleto(ordem);
                     System.out.println(grafo.toString());
                     break;
+
                 case 6:
                     grafoMutavel.addVertice(1);
                     grafoMutavel.addVertice(2);
@@ -102,10 +123,12 @@ public class AppMenu {
 
                     gerarSubGrafo(grafoMutavel);
                     break;
+
                 case 7:
                     System.out.println("Retorno da pesquisa");
                     grafo.dfs(2);
                     break;
+                    
                 case 8:
                     System.out.println("\nDigite o vertice: ");
                     String verticeEntradaTeclado = teclado.nextLine();
