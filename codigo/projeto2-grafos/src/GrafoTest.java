@@ -28,11 +28,6 @@ public class GrafoTest {
         assertNull(Grafo.grafoCompleto(-4));
     }
     @Test
-    public void deveCriarumGrafoCompletoDaClasse(){        
-        GrafoCompleto grafoT = new GrafoCompleto(4);
-        assertTrue(grafoT.completo());
-    }
-    @Test
     public void deveRetornarTrueCasoGrafoCompletoSejaGeradoComSucesso(){
         grafo = Grafo.grafoCompleto(6);
         assertTrue(grafo.completo());
