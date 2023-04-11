@@ -65,6 +65,12 @@ public class GrafoMutavel extends Grafo {
         }
     }
  
+    /**
+     * Carregar um arquivo de Grafo
+     * @param nomeArquivo
+     * @throws FileNotFoundException
+     * @throws EOFException
+     */
     public void carregar(String nomeArquivo) throws FileNotFoundException, EOFException {
         File file = new File("./codigo/projeto2-grafos/arquivos/" + nomeArquivo + ".csv");
         Scanner entrada = new Scanner(file, "UTF-8");
