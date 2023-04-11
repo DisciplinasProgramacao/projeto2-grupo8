@@ -113,14 +113,17 @@ public class GrafoMutavel extends Grafo {
         Vertice arrayVertice[] = new Vertice[vertices.size()];
         vertices.allElements(arrayVertice);
 
-        for (int i = 1; i <= arrayVertice.length; i++) {
+        for (int i = 0; i < arrayVertice.length; i++) {
             Vertice vertice = vertices.find(arrayVertice[i].getId());
             idVert.append(vertice.getId());
-            if (i < this.ordem())
+            if (i+1 < arrayVertice.length)
                 idVert.append(",");
 
-            for (int j = i + 1; j <= this.ordem(); j++) {
-                Aresta aresta = vertice.existeAresta(j);
+            Aresta arestas[] = new Aresta[vertice.getAresta().size()];
+            vertice.getAresta().allElements(arestas);
+
+            for (int j = 0; j < arestas.length; j++) {
+                Aresta aresta = vertice.existeAresta(arestas[j].destino());
                 if (aresta != null) {
                     idArest.append(vertice.getId());
                     idArest.append("-");
