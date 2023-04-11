@@ -1,3 +1,6 @@
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -152,7 +155,29 @@ public class Grafo {
     }
 
     public Grafo dfs(int idVerticeInicio){
-        return null;
+        boolean[] visited = new boolean[idVerticeInicio];
+        GrafoMutavel result = new GrafoMutavel("DFS");
+        LinkedList<Integer>[] adj = new LinkedList[idVerticeInicio];
+        Stack<Integer> stack = new Stack<Integer>();
+        
+        stack.push(idVerticeInicio);
+
+        while (!stack.isEmpty()) {
+            int current = stack.pop();
+            if (!visited[current]) {
+                visited[current] = true;
+                result.addAresta(idVerticeInicio, current, 0);
+                Iterator<Integer> i = adj[current].listIterator();
+                while (i.hasNext()) {
+                    int n = i.next();
+                    if (!visited[n]) {
+                        stack.push(n);
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 
 }

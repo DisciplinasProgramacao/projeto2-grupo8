@@ -25,6 +25,7 @@ public class App {
         System.out.println("4 - Criar Grafo com aresta nao ponderada");
         System.out.println("5 - Gerar Grafo Completo");
         System.out.println("6 - Gerar Subgrafo ");
+        System.out.println("7 - Fazer pesquisa DFS");
         System.out.println("0 - Sair");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
@@ -80,6 +81,10 @@ public class App {
                     Grafo subGrafo = gerarSubGrafo(grafo);
                     //subGrafo.salvar("subgrafo");
                     System.out.println("Arquivo de subgrafo criado");
+                    break;
+                case 7: 
+                    System.out.println("Retorno da pesquisa");
+                    grafo.bfs(2);
                     break;
             }
             pausa();
