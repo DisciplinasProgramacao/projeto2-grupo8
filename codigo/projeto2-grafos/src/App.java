@@ -132,6 +132,7 @@ public class App {
                     verticeEntradaTeclado = teclado.nextLine();
                     System.out.println("Retorno da pesquisa bfs");
                     grafo.dfs(2);
+                    System.out.println(grafo.toString());
                     break;
                     
                 case 8:

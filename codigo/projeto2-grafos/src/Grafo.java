@@ -209,8 +209,8 @@ public class Grafo {
         if (!vertice.visitado()) { // se não foi visitado ele entra
             vertice.visitar(); // adiciona que foi visitado
             Lista<Integer> vizinhosList = vertice.vizinhos(); // preenche uma list com os seus vizinhos
-            for (int x = 0; x <= vizinhosList.size();) { // percorre essa lista de vizinhos 
-                search_dfs(vertices.find(x), grafoRetorno, x); // entra no metodo e faz ele percorrer cada vizinho do vizinho
+            for (int x = 1; x <= vizinhosList.size();) { // percorre essa lista de vizinhos 
+                search_dfs(this.vertices.find(x), grafoRetorno, x); // entra no metodo e faz ele percorrer cada vizinho do vizinho
                 vizinhosList.remove(x);  // remove da lista o vizinho já percorrido
                 grafoRetorno.addAresta(vertice.getId(), x, 0);// adiciona as arestas  do vertice original para seus vizinhos
             }
