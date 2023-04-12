@@ -125,19 +125,26 @@ public class App {
                     break;
 
                 case 7:
+                    if(grafo.vertices.size() == 0){
+                        System.out.println("Selecione primeiro a opção 5 para gerar um grafo");
+                        break;
+                    }
                     verticeEntradaTeclado = "";
                     System.out.println("\nDigite o vertice: ");
                     verticeEntradaTeclado = teclado.nextLine();
                     System.out.println("Retorno da pesquisa bfs");
-                    grafo.dfs(2);
-                    System.out.println(grafo.toString());
+                    System.out.println(grafo.dfs(Integer.parseInt(verticeEntradaTeclado)).toString());
                     break;
 
                 case 8:
+                    if(grafo.vertices.size() == 0){
+                        System.out.println("Selecione primeiro a opção 5 para gerar um grafo");
+                        break;
+                    }                
                     System.out.println("\nDigite o vertice: ");
                     verticeEntradaTeclado = teclado.nextLine();
                     System.out.println("Retorno da pesquisa bfs");
-                    grafo.bfs(Integer.parseInt(verticeEntradaTeclado));
+                    System.out.println(grafo.bfs(Integer.parseInt(verticeEntradaTeclado)).toString());
                     break;
             }
             pausa();

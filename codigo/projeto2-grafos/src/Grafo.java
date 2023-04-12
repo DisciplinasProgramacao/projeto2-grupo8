@@ -76,6 +76,12 @@ public class Grafo {
         return this.nome;
     }
 
+    /**
+     * Verifica se existe vértice com o id passado como parametro
+     * 
+     * @param idVertice
+     * @return null caso não exista vértice e o vertice caso exista
+     */
     public Vertice existeVertice(int idVertice) {
         Vertice vertice = vertices.find(idVertice);
         if (vertice != null)
@@ -83,6 +89,12 @@ public class Grafo {
         return null;
     }
 
+    /**
+     * Valida se existe aresta entre o vertice A e B
+     * @param verticeA
+     * @param verticeB
+     * @return Aresta caso exista e null caso não exista
+     */
     public Aresta existeAresta(int verticeA, int verticeB) {
         Vertice verA = this.existeVertice(verticeA);
         Vertice verB = this.existeVertice(verticeB);
@@ -93,6 +105,11 @@ public class Grafo {
         return null;
     }
 
+    /**
+     * Valida se o grafo gerado é completo ou não
+     * 
+     * @return TRUE caso grafo completo e FALSE caso contrário
+     */
     public boolean completo() {
         int ordem = this.ordem();
 
@@ -107,13 +124,12 @@ public class Grafo {
     }
 
     /**
+     * Cria um subgrafo de um grafo criado anteriormente a partir de uma lista de vértices passados como parâmetro
      * 
      * @param vertices Recebe uma lista de vértices, para criar o subgrafo
      * @return Subgrafo
      */
-
     public Grafo subGrafo(Lista<Integer> vertices) {
-        // Grafo subgrafo = new Grafo("Subgrafo de " + this.nome);
         GrafoMutavel subGrafoMutavel = new GrafoMutavel("Subgrafo de" + this.nome);
         Integer vetor[] = new Integer[vertices.size()];
         vetor = vertices.allElements(vetor);
@@ -132,6 +148,11 @@ public class Grafo {
         return subGrafoMutavel;
     }
 
+    /**
+     * Retorna o tamanho do grafo
+     * 
+     * @return tamanho do grafo
+     */
     public int tamanho() {
         int vertices = this.ordem();
         int arestas = 0;
@@ -146,10 +167,21 @@ public class Grafo {
         return arestas + vertices;
     }
 
+    /**
+     * Método que retorna a ordem do grafo (quantidade de vértices)
+     * 
+     * @return ordem do grafo
+     */
     public int ordem() {
         return this.vertices.size();
     }
 
+    /**
+     * Realiza a busca em largura no grafo a partir de um vértice de inicio
+     * 
+     * @param idVerticeInicio Vértice a partir do qual a busca ira iniciar
+     * @return Grafo com o resultado da busca (Representação da busca)
+     */
     public GrafoMutavel bfs(int idVerticeInicio) {
         GrafoMutavel grafoRetorno = new GrafoMutavel(this.nome + " BFS");
         Queue<Vertice> queue = new LinkedList<>();
@@ -162,28 +194,27 @@ public class Grafo {
             Lista<Integer> vizinhosList = queue.remove().vizinhos();
             Integer[] vizinhosListArray = new Integer[vizinhosList.size()];
             vizinhosListArray = vizinhosList.allElements(vizinhosListArray);
-            // System.out.println(vizinhosListArray[0] + " " + vizinhosListArray[1]);
+
             for (int i = 0; i < vizinhosList.size(); i++) {
                 if (!vertices.find(vizinhosListArray[i]).visitado()) {
-                    // System.out.println("pass" + i);
                     vertices.find(vizinhosListArray[i]).visitar();
                     queue.add(vertices.find(vizinhosListArray[i]));
                     grafoRetorno.addVertice(vizinhosListArray[i]);
-                    // System.out.println(vizinhosListArray[i] + " - " +
-                    // vertices.find(vizinhosListArray[i]).getId());
                     grafoRetorno.addAresta(vertices.find(vizinhosListArray[i]).getId(), idVerticeInicio, 0);
                 }
             }
             idVerticeInicio = vizinhosListArray[0];
         }
-        /*
-         * for (int i = 0; i < vertices.size(); i++) {
-         * vertices.find(i).limparVisita();
-         * }
-         */
+
         return grafoRetorno;
     }
 
+    /**
+     * Realiza a busca em profundidade no grafo a partir de um vértice de inicio
+     * 
+     * @param idVerticeInicio Vértice a partir do qual a busca ira iniciar
+     * @return Grafo com o resultado da busca (Representação da busca)
+     */    
     public Grafo dfs(int idVerticeInicio) {
         GrafoMutavel grafoRetorno = new GrafoMutavel(this.nome + " DFS");
 
@@ -205,6 +236,12 @@ public class Grafo {
         return grafoRetorno;
     }
 
+    /**
+     * Método recursivo para realizar a busca em profundidade
+     * @param vertice
+     * @param grafoRetorno
+     * @param i
+     */    
     public void search_dfs(Vertice vertice, GrafoMutavel grafoRetorno, int i) {
         if (!vertice.visitado()) { // se não foi visitado ele entra
             vertice.visitar(); // adiciona que foi visitado
@@ -218,6 +255,12 @@ public class Grafo {
         grafoRetorno.addVertice(i);
     }
 
+    /**
+     * Método toString para converter um grafo em uma string
+    * @return Vértices e arestas do grafo em uma string ex:
+    *    Grafo: vertice;1,2,3
+    *    aresta;1-2-0,1-3-0
+    */
     public String toString(){
         StringBuilder idVert = new StringBuilder();
         StringBuilder idArest = new StringBuilder();
@@ -254,7 +297,9 @@ public class Grafo {
         grafoString.append("vertice;");
         grafoString.append(idVert.toString() + ";");
         grafoString.append("\naresta;");
-        grafoString.append(idArestStr.substring(0, idArestStr.length() - 1) + ";");
+        if(idArestStr.length() > 0)
+            grafoString.append(idArestStr.substring(0, idArestStr.length() - 1) + ";");
+
         return grafoString.toString();
     }
 

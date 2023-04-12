@@ -45,6 +45,12 @@ public class Aresta {
         init(0, destino);
     }
 
+    /**
+     * Método inicializador para ser utilizado pelos construtores que recebe o peso e o vértice de destino da aresta
+     * 
+     * @param peso
+     * @param destino
+     */
     private void init(int peso, int destino){
         this.peso = peso;
         this.destino = destino;

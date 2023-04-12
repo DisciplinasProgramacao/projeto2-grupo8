@@ -53,6 +53,13 @@ public class GrafoMutavel extends Grafo {
         return adicionou;
     }
 
+    /**
+     * Método para remover a aresta com origem e destino de acordo com os parâmetros recebidos
+     * 
+     * @param origem Vértice de origem
+     * @param destino Vértice de destino
+     * @return Aresta removida caso exista e null caso não exista aresta
+     */
     public Aresta removeAresta(int origem, int destino) {
         Vertice verticeO = vertices.find(origem);
         Aresta arestaR = this.existeAresta(origem, destino);
@@ -145,7 +152,9 @@ public class GrafoMutavel extends Grafo {
         gravarArq.write("vertice;");
         gravarArq.write(idVert.toString() + ";");
         gravarArq.write("\naresta;");
-        gravarArq.write(idArestStr.substring(0, idArestStr.length() - 1) + ";");
+
+        if(idArestStr.length() > 0)
+            gravarArq.write(idArestStr.substring(0, idArestStr.length() - 1) + ";");
 
         arq.close();
     }
