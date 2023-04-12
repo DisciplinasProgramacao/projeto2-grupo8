@@ -1,6 +1,10 @@
 
 public class GrafoDirecionado extends GrafoMutavel {
 
+    /**
+     * Construtor que cria grafo direcionado de acordo com seu nome
+     * @param nome
+     */
     public GrafoDirecionado(String nome) {
         super(nome);
     }
